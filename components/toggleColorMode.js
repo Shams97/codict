@@ -1,7 +1,7 @@
 /**@jsxRuntime classic */
 /**@jsx jsx */
 import { jsx, useColorMode } from "theme-ui";
-import { Button, NavItem, NavLink } from "reactstrap";
+import { NavLink } from "reactstrap";
 
 export default function ToggleColors() {
   const [mode, setMode] = useColorMode();
@@ -18,11 +18,10 @@ export default function ToggleColors() {
       sx={_SX.root}
       color="primary"
       onClick={() => {
-        console.log(mode);
         const next = mode === "dark" ? "light" : "dark";
         setMode(next);
       }}>
-      <NavLink>{mode === "dark" ? "Light" : "Dark"}</NavLink>
+      <NavLink>{mode === "dark" ? "Dark" : "Light"}</NavLink>
     </div>
   );
 }

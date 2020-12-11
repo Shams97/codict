@@ -1,17 +1,16 @@
 /**@jsxRuntime classic */
 /**@jsx jsx */
 
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { jsx } from "theme-ui";
 import Layout from "../components/Layout";
 import { wordsCtx } from "../ctx/words/wordsCtx";
-import mockedWords from "../mock/words";
+import { wordsArchive } from "../mock/words";
+import useLabels from "../lib/useLabels";
 
 export default function Home({ options }) {
   const [_, spreadWords] = useContext(wordsCtx);
-  useEffect(() => {
-    spreadWords(options);
-  }, []);
+  useLabels(options, spreadWords);
   return (
     <Layout
       title="codict"
@@ -22,7 +21,7 @@ export default function Home({ options }) {
 }
 
 export function getStaticProps() {
-  const options = mockedWords;
+  const options = wordsArchive;
   return {
     props: {
       options,

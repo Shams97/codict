@@ -1,12 +1,12 @@
-import { polaris, dark } from "@theme-ui/presets";
+import { deep, base } from "@theme-ui/presets";
 import { merge } from "theme-ui";
-const theme = merge(polaris, {
+const theme = merge(deep, {
   breakpoints: ["30rem", "40rem", "56rem", "64rem"],
   colors: {
-    ...polaris.colors,
+    ...deep.colors,
     modes: {
       dark: {
-        ...dark.colors,
+        ...base.colors,
       },
     },
   },

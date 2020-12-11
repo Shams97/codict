@@ -3,10 +3,8 @@
 import { jsx } from "theme-ui";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { ThemeProvider } from "theme-ui";
+import { ThemeProvider, useThemeUI } from "theme-ui";
 import base from "../styles/theme";
-import LeftSide from "../components/LeftSide";
-import RightSide from "../components/RightSide";
 import AppNav from "../components/Navbar";
 import { Container, Row, Col } from "reactstrap";
 import CreatableSelect, { components } from "react-select";
@@ -24,9 +22,42 @@ const defaultKeywords = [
   "linux",
 ];
 
-const Option = ({ children, ...props }) => (
-  <components.Option {...props}>{children}</components.Option>
-);
+const Option = ({ children, ...props }) => {
+  const themeUiCtx = useThemeUI();
+  const { colorMode } = themeUiCtx;
+
+  return (
+    <components.Option
+      {...props}
+      sx={{
+        backgroundColor: "background",
+        color: "text",
+        borderRadius: "3px",
+        ":hover": {
+          backgroundColor: colorMode === "light" ? "muted" : "text",
+          color: colorMode === "light" ? "text" : "background",
+        },
+      }}>
+      {children}
+    </components.Option>
+  );
+};
+
+const Menu = ({ children, ...props }) => {
+  return (
+    <components.Menu
+      {...props}
+      sx={{
+        backgroundColor: "background",
+        borderColor: "text",
+        border: "1px solid",
+        borderRadius: "5px",
+        padding: "0 5px",
+      }}>
+      {children}
+    </components.Menu>
+  );
+};
 
 export default function Layout({
   children,
@@ -43,28 +74,8 @@ export default function Layout({
       gridTemplateColumns: "25% 50% 25%",
       gridGap: 0,
     },
-    leftCol: {
-      marginTop: "8rem",
-      "@media(max-width: 767px)": {
-        order: 3,
-        padding: "1rem",
-        margin: "auto",
-        marginTop: "2rem",
-      },
-    },
-    middleCol: {
-      "@media(max-width: 767px)": {
-        order: 1,
-      },
-    },
-    rightCol: {
-      marginTop: "8rem",
-      "@media(max-width: 767px)": {
-        order: 2,
-        padding: "1rem",
-        margin: "auto",
-        marginTop: "2rem",
-      },
+    div: {
+      width: "100%",
     },
   };
   const router = useRouter();
@@ -78,6 +89,7 @@ export default function Layout({
   const handleInputChange = (inputValue, actionMeta) => {
     //  on user typing
   };
+
   return (
     <div sx={_SX.div}>
       <Head>
@@ -105,35 +117,23 @@ export default function Layout({
         <main>
           <Container>
             <Row>
-              <Col md="3" sx={_SX.leftCol}>
-                <LeftSide />
+              <Col xs="12" md="8" className="mx-auto my-4">
+                {title !== "about" && (
+                  <CreatableSelect
+                    id="1"
+                    instanceId="1"
+                    inputId="1"
+                    name="words"
+                    isClearable
+                    isSearchable
+                    components={{ Option, Menu }}
+                    onChange={handleChange}
+                    onInputChange={handleInputChange}
+                    options={words}
+                  />
+                )}
               </Col>
-              <Col md="6" sx={_SX.middleCol}>
-                <Container>
-                  <Row>
-                    <Col>
-                      {title !== "about" && (
-                        <CreatableSelect
-                          id="1"
-                          instanceId="1"
-                          inputId="1"
-                          name="words"
-                          isClearable
-                          isSearchable
-                          components={{ Option }}
-                          onChange={handleChange}
-                          onInputChange={handleInputChange}
-                          options={words}
-                        />
-                      )}
-                    </Col>
-                  </Row>
-                  <Row>{children}</Row>
-                </Container>
-              </Col>
-              <Col md="3" sx={_SX.rightCol}>
-                <RightSide />
-              </Col>
+              <Col md="12 mt-4">{children}</Col>
             </Row>
           </Container>
         </main>

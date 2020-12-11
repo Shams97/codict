@@ -12,6 +12,7 @@ export default function CustomNavItem({ url = "", text = "", comp = null }) {
         marginTop: "1.2rem",
       },
       "& a": {
+        color: "text",
         textDecoration: "none",
       },
     },

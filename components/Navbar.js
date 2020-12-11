@@ -13,23 +13,24 @@ const AppNav = () => {
   const _SX = {
     navbar: {
       backgroundColor: "background",
-      "@media(min-width: 768px)": {
-        backgroundColor: "background",
-        borderBottom: "1px solid highlight",
-        boxShadow: "1px 0 5px 0px gray",
-      },
     },
     navbarBrand: {
+      "@media(max-width: 768px)": {
+        justifyContent: "space-between",
+      },
+
       display: "flex",
       alignItems: "center",
       justifyContent: "flex-start",
       width: "100%",
     },
     navbarBrandAnchor: {
+      color: "text",
       textDecoration: "none",
       ":hover": {
         cursor: "pointer",
         textDecoration: "none",
+        color: "text",
       },
     },
 
@@ -38,15 +39,16 @@ const AppNav = () => {
       flexDirection: "column",
       justifyContent: "space-between",
       outline: "none",
+
       ": focus": {
         outline: "none",
       },
       "& span": {
-        backgroundColor: "primary",
         marginTop: "3px",
         width: "5px",
         height: "5px",
         borderRadius: "50%",
+        backgroundColor: "text",
       },
     },
   };
@@ -58,10 +60,10 @@ const AppNav = () => {
   return (
     <div>
       <Navbar fixed="top" expand="md" sx={_SX.navbar}>
-        <div sx={_SX.navbarBrand}>
+        <div sx={_SX.navbarBrand} className="p-2">
           <Link href="/" passHref>
             <a sx={_SX.navbarBrandAnchor}>
-              <Text>codict</Text>
+              <Text as="h1">codict</Text>
             </a>
           </Link>
           <NavbarToggler type="submit" onClick={toggle} sx={_SX.toggler}>
@@ -73,7 +75,7 @@ const AppNav = () => {
 
         <Collapse isOpen={isOpen} navbar>
           <Nav
-            className="ml-auto"
+            className="ml-auto pt-2"
             navbar
             sx={{
               alignItems: "center",
