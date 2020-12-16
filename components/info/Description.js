@@ -1,15 +1,15 @@
 /**@jsxRuntime classic */
 /**@jsx jsx */
 import { jsx } from "theme-ui";
-import { Card, CardBody, CardFooter, CardText, Col, Row } from "reactstrap";
+import { Card, CardBody, CardFooter, Col, Row } from "reactstrap";
 import NextDef from "../info/NextDef";
 import DescNavItem from "../info/DescNavItem";
-
+import Quote from "../info/Quote";
 const _SX = {
   card: {
     backgroundColor: "background",
     color: "text",
-    borderColor: "gray",
+    borderColor: "highlight",
   },
   cardFooter: {
     backgroundColor: "background",
@@ -34,12 +34,14 @@ export default function Description({ words, availableWords }) {
       <Col>
         <Card className="mt-4" sx={_SX.card}>
           <CardBody>
-            <CardText>{words[counter].db.description}</CardText>
+            <Quote words={words} counter={counter}>
+              {words[counter].db.description}
+            </Quote>
           </CardBody>
           <CardFooter className="p-0" sx={_SX.cardFooter}>
             <ul sx={_SX.sociaList}>
               {words[counter].db.social.map((social, i) => {
-                return <DescNavItem social={social} i={i} />;
+                return <DescNavItem social={social} key={i} />;
               })}
               <NextDef availableWords={availableWords} />
             </ul>

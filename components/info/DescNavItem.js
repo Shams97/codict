@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import IconButton from "@material-ui/core/IconButton";
 import Badge from "@material-ui/core/Badge";
 
-export default function DescNavItem({ social, i }) {
+export default function DescNavItem({ social }) {
   const _SX = {
     socialItem: {
       backgroundColor: "background",
@@ -25,7 +25,7 @@ export default function DescNavItem({ social, i }) {
     },
   };
   return (
-    <li sx={_SX.socialItem} key={i}>
+    <li sx={_SX.socialItem}>
       <IconButton
         disableRipple
         aria-label={social.name}

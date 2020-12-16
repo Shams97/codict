@@ -1,6 +1,5 @@
 /**@jsxRuntime classic */
 /**@jsx jsx */
-import { counter } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { jsx } from "theme-ui";
 const _SX = {
@@ -29,15 +28,15 @@ const _SX = {
   },
 };
 export default function NextDef({ availableWords }) {
-  const { counter, setCounter } = availableWords;
+  const { counter, setCounter, wordsCount } = availableWords;
   const handleNextDescription = (e) => {
     e.preventDefault();
-    setCounter(counter + 1);
+    if (counter < wordsCount) setCounter(counter + 1);
   };
 
   const hadnlePrevDescription = (e) => {
     e.preventDefault();
-    setCounter(counter - 1);
+    if (counter > 1) setCounter(counter - 1);
   };
   return (
     <li className="ml-auto" sx={_SX.li}>

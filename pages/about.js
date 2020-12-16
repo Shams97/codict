@@ -1,7 +1,7 @@
 /**@jsxRuntime classic */
 /**@jsx jsx */
 import { jsx, Text } from "theme-ui";
-import Layout from "../components/Layout";
+import Layout from "../components/layout/Layout";
 export default function About() {
   return (
     <Layout title="about">

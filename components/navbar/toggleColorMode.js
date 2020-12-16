@@ -18,10 +18,10 @@ export default function ToggleColors() {
       sx={_SX.root}
       color="primary"
       onClick={() => {
-        const next = mode === "dark" ? "light" : "dark";
+        const next = mode === "light" ? "dark" : "light";
         setMode(next);
       }}>
-      <NavLink>{mode === "dark" ? "Dark" : "Light"}</NavLink>
+      <NavLink>{mode === "dark" ? "Light" : "Dark"}</NavLink>
     </div>
   );
 }

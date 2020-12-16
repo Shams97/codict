@@ -1,0 +1,53 @@
+/*
+color values sued here are equal to color values used in theme-ui 
+base and deep themes.
+*/
+
+.scrollbarBase {
+  overflow-x: scroll;
+  &::-webkit-scrollbar {
+    border-radius: 5px;
+    background-color: transparent;
+    height: 8px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: transparent;
+    border-radius: 5px;
+  }
+  &:hover {
+    &::-webkit-scrollbar {
+      border-radius: 5px;
+      background-color: hsl(210, 50%, 96%);
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: hsl(290, 100%, 80%);
+      border-radius: 5px;
+    }
+  }
+}
+.scrollbarDeep {
+  overflow-x: scroll;
+  &::-webkit-scrollbar {
+    height: 8px;
+    border-radius: 5px;
+    background-color: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: transparent;
+    border-radius: 5px;
+  }
+  &:hover {
+    &::-webkit-scrollbar {
+      border-radius: 5px;
+      background-color: #000;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: #30c;
+      border-radius: 5px;
+    }
+  }
+}

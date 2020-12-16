@@ -3,7 +3,7 @@
 
 import { useContext } from "react";
 import { jsx } from "theme-ui";
-import Layout from "../components/Layout";
+import Layout from "../components/layout/Layout";
 import { wordsCtx } from "../ctx/words/wordsCtx";
 import { wordsArchive } from "../mock/words";
 import useLabels from "../lib/useLabels";

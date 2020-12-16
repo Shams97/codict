@@ -3,13 +3,15 @@
 import { jsx } from "theme-ui";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { ThemeProvider, useThemeUI } from "theme-ui";
-import base from "../styles/theme";
-import AppNav from "../components/Navbar";
+import { ThemeProvider } from "theme-ui";
+import base from "../../styles/theme";
+import AppNav from "../navbar/Navbar";
 import { Container, Row, Col } from "reactstrap";
-import CreatableSelect, { components } from "react-select";
+import CreatableSelect from "react-select";
 import { useContext } from "react";
-import { wordsCtx } from "../ctx/words/wordsCtx";
+import { wordsCtx } from "../../ctx/words/wordsCtx";
+import Menu from "./Menu";
+import Option from "./Option";
 
 const defaultKeywords = [
   "computer",
@@ -21,43 +23,6 @@ const defaultKeywords = [
   "javascript",
   "linux",
 ];
-
-const Option = ({ children, ...props }) => {
-  const themeUiCtx = useThemeUI();
-  const { colorMode } = themeUiCtx;
-
-  return (
-    <components.Option
-      {...props}
-      sx={{
-        backgroundColor: "background",
-        color: "text",
-        borderRadius: "3px",
-        ":hover": {
-          backgroundColor: colorMode === "light" ? "muted" : "text",
-          color: colorMode === "light" ? "text" : "background",
-        },
-      }}>
-      {children}
-    </components.Option>
-  );
-};
-
-const Menu = ({ children, ...props }) => {
-  return (
-    <components.Menu
-      {...props}
-      sx={{
-        backgroundColor: "background",
-        borderColor: "text",
-        border: "1px solid",
-        borderRadius: "5px",
-        padding: "0 5px",
-      }}>
-      {children}
-    </components.Menu>
-  );
-};
 
 export default function Layout({
   children,

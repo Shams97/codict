@@ -1,11 +1,11 @@
 /**@jsxRuntime classic */
 /**@jsx jsx */
-import { jsx, Box, Input, Text } from "theme-ui";
+import { jsx, Text } from "theme-ui";
 import { useState } from "react";
 import Link from "next/link";
 import { Collapse, Navbar, NavbarToggler, Nav } from "reactstrap";
 import ToggleColors from "./toggleColorMode";
-import CustomNavItem from "../components/CustomNavItem";
+import CustomNavItem from "./CustomNavItem";
 
 const AppNav = () => {
   const [isOpen, setIsOpen] = useState(false);

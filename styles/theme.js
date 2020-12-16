@@ -5,7 +5,7 @@ const theme = merge(deep, {
   colors: {
     ...deep.colors,
     modes: {
-      dark: {
+      light: {
         ...base.colors,
       },
     },
