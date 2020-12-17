@@ -12,6 +12,7 @@ import Description from "../components/info/Description";
 import InfoTable from "../components/info/Table";
 import Lists from "../components/info/ArticleLinks";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Synonyms from "../components/info/Synonyms";
 const _SX = {
   header: {
     display: "flex",
@@ -65,6 +66,10 @@ export default function WordPage({ words, options }) {
             <Lists words={words} counter={counter} links />
             <Lists words={words} counter={counter} videos />
             <Lists words={words} counter={counter} books />
+
+            <Row className="my-4">
+              <Synonyms words={words} counter={counter} />
+            </Row>
           </Col>
         </Row>
       </Container>

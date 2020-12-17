@@ -63,7 +63,9 @@ const AppNav = () => {
         <div sx={_SX.navbarBrand} className="p-2">
           <Link href="/" passHref>
             <a sx={_SX.navbarBrandAnchor}>
-              <Text as="h1">codict</Text>
+              <Text as="h1">
+                c<span sx={{ color: "chartreuse" }}>o</span>dict
+              </Text>
             </a>
           </Link>
           <NavbarToggler type="submit" onClick={toggle} sx={_SX.toggler}>
