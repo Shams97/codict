@@ -12,7 +12,7 @@ import { useContext } from "react";
 import { wordsCtx } from "../../ctx/words/wordsCtx";
 import Menu from "./Menu";
 import Option from "./Option";
-
+import NoOptionsMessage from "./NoOptionMessage";
 const defaultKeywords = [
   "computer",
   "science",
@@ -91,7 +91,7 @@ export default function Layout({
                     name="words"
                     isClearable
                     isSearchable
-                    components={{ Option, Menu }}
+                    components={{ Option, Menu, NoOptionsMessage }}
                     onChange={handleChange}
                     onInputChange={handleInputChange}
                     options={words}

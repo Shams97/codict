@@ -23,6 +23,7 @@ const _SX = {
 
 export default function WordPage({ words, options }) {
   const [_, spreadWords] = useContext(wordsCtx);
+  // counter should always star at 1, this where rendered words data start off
   const [counter, setCounter] = useState(1);
 
   useLabels(options, spreadWords);
