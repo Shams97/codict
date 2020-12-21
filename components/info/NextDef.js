@@ -1,8 +1,8 @@
 /**@jsxRuntime classic */
 /**@jsx jsx */
-import { counter } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { jsx } from "theme-ui";
+import CreatedBy from "../info/CreatedBy";
 const _SX = {
   button: {
     border: "none",
@@ -12,14 +12,14 @@ const _SX = {
       outline: "none",
     },
     "& svg": {
-      color: "text",
+      color: "primary",
       backgroundColor: "background",
     },
     "&:hover svg": {
-      color: "primary",
+      color: "text",
     },
     "& svg:hover": {
-      color: "primary",
+      color: "text",
     },
   },
   li: {
@@ -29,20 +29,35 @@ const _SX = {
   },
 };
 export default function NextDef({ availableWords }) {
-  const { counter, setCounter } = availableWords;
+  const { counter, setCounter, wordsCount, words } = availableWords;
   const handleNextDescription = (e) => {
     e.preventDefault();
-    setCounter(counter + 1);
+
+    if (counter < wordsCount) {
+      setCounter(counter + 1);
+    } else {
+      return;
+    }
   };
 
   const hadnlePrevDescription = (e) => {
     e.preventDefault();
-    setCounter(counter - 1);
+    if (counter > 1) {
+      setCounter(counter - 1);
+    } else {
+      return;
+    }
   };
   return (
     <li className="ml-auto" sx={_SX.li}>
-      <button className="p-1" sx={_SX.button} onClick={hadnlePrevDescription}>
-        <FontAwesomeIcon width="20px" height="20px" icon="caret-left" />
+      <CreatedBy username={words[counter].db.user} />
+      <button className="p-1" sx={_SX.button}>
+        <FontAwesomeIcon
+          width="20px"
+          height="20px"
+          icon="caret-left"
+          onClick={hadnlePrevDescription}
+        />
       </button>
       <button className="p-1" sx={_SX.button}>
         <FontAwesomeIcon

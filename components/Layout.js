@@ -37,7 +37,8 @@ const Option = ({ children, ...props }) => {
           backgroundColor: colorMode === "light" ? "muted" : "text",
           color: colorMode === "light" ? "text" : "background",
         },
-      }}>
+      }}
+    >
       {children}
     </components.Option>
   );
@@ -53,7 +54,8 @@ const Menu = ({ children, ...props }) => {
         border: "1px solid",
         borderRadius: "5px",
         padding: "0 5px",
-      }}>
+      }}
+    >
       {children}
     </components.Menu>
   );
@@ -133,7 +135,9 @@ export default function Layout({
                   />
                 )}
               </Col>
-              <Col md="12 mt-4">{children}</Col>
+              <Col xs="12" className="mt-4">
+                {children}
+              </Col>
             </Row>
           </Container>
         </main>

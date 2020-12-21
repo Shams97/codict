@@ -29,7 +29,8 @@ export default function DescNavItem({ social, i }) {
       <IconButton
         disableRipple
         aria-label={social.name}
-        sx={{ ":focus": { outline: "none" } }}>
+        sx={{ ":focus": { outline: "none" } }}
+      >
         <Badge>
           <FontAwesomeIcon
             icon={social.icon}

@@ -15,6 +15,7 @@ const mockedWords = [
       title: "Js",
     },
     db: {
+      user: "user_xxsa1",
       name: "Js",
       sound: "Jay-ess",
       description:
@@ -34,25 +35,26 @@ const mockedWords = [
     },
   },
   {
-    id: 1,
+    id: 0,
     seo: {
       description: "description about javascript",
       keywords: ["js", "ecmascript", "JS", "js", "es"],
       title: "Js",
     },
     db: {
+      user: "user2",
       name: "Js",
-      sound: "jafa-skript",
-      description: "second description about javascript",
+      sound: "Jay-ess",
+      description:
+        "second description of javasxrio[t second description of javasxrio[t second description of javasxrio[t second description of javasxrio[t second description of javasxrio[t second description of javasxrio[tsecond description of javasxrio[t",
       social: [
-        { name: "like", count: 4 },
-        { name: "dislike", count: 0 },
-        { name: "heart", count: 2 },
-        { name: "edit", available: true },
+        { name: "like", count: 0, icon: "thumbs-up", color: "green" },
+        { name: "dislike", count: 2, icon: "heart-broken", color: "red" },
+        { name: "edit", icon: "edit", color: "secondary" },
       ],
-      usedInLang: ["es"],
-      usedInField: ["software development", "web dev"],
-      usedInOs: ["linux", "windows", "osx", "iosx", "ubuntu"],
+      usedInLang: ["javascript"],
+      usedInField: ["software development"],
+      usedInOs: ["linux", "windows", "osx", "iosx"],
       articleLinks: ["/link-1", "/link-2", "/link-3", "/link-4"],
       videoLinks: ["/link-1", "/link-2", "/link-3", "/link-4"],
       booksLinks: ["/link-1", "/link-2", "/link-3", "/link-4"],
