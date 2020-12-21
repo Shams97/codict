@@ -3,8 +3,6 @@
 import { jsx } from "theme-ui";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { ThemeProvider } from "theme-ui";
-import base from "../../styles/theme";
 import AppNav from "../navbar/Navbar";
 import { Container, Row, Col } from "reactstrap";
 import CreatableSelect from "react-select";
@@ -13,6 +11,9 @@ import { wordsCtx } from "../../ctx/words/wordsCtx";
 import Menu from "./Menu";
 import Option from "./Option";
 import NoOptionsMessage from "./NoOptionMessage";
+import ThemeUICTX from "../../ctx/themes/ThemeUI-Ctx";
+import MaterialUICTX from "../../ctx/themes/MateriaUI-Ctx";
+
 const defaultKeywords = [
   "computer",
   "science",
@@ -29,6 +30,7 @@ export default function Layout({
   title,
   description,
   keywords = defaultKeywords,
+  noInput = false,
 }) {
   const _SX = {
     header: {
@@ -75,34 +77,43 @@ export default function Layout({
         <meta property="og:title" content={title} key="ogtitle" />
         <meta property="og:description" content={description} key="ogdesc" />
       </Head>
-      <ThemeProvider theme={base}>
-        <header sx={_SX.header}>
-          <AppNav />
-        </header>
-        <main>
-          <Container>
-            <Row>
-              <Col xs="12" md="8" className="mx-auto my-4">
-                {title !== "about" && (
-                  <CreatableSelect
-                    id="1"
-                    instanceId="1"
-                    inputId="1"
-                    name="words"
-                    isClearable
-                    isSearchable
-                    components={{ Option, Menu, NoOptionsMessage }}
-                    onChange={handleChange}
-                    onInputChange={handleInputChange}
-                    options={words}
-                  />
-                )}
-              </Col>
-              <Col md="12 mt-4">{children}</Col>
-            </Row>
-          </Container>
-        </main>
-      </ThemeProvider>
+      <ThemeUICTX>
+        <MaterialUICTX>
+          <header sx={_SX.header}>
+            <AppNav />
+          </header>
+          <main>
+            <Container>
+              {noInput ? (
+                <Row>
+                  <Col md="12 mt-4">{children}</Col>
+                </Row>
+              ) : (
+                <Row>
+                  <Col xs="12" md="8" className="mx-auto my-4">
+                    {title !== "about" && (
+                      <CreatableSelect
+                        id="1"
+                        instanceId="1"
+                        inputId="1"
+                        name="words"
+                        isClearable
+                        isSearchable
+                        components={{ Option, Menu, NoOptionsMessage }}
+                        onChange={handleChange}
+                        onInputChange={handleInputChange}
+                        options={words}
+                      />
+                    )}
+                  </Col>
+
+                  <Col md="12 mt-4">{children}</Col>
+                </Row>
+              )}
+            </Container>
+          </main>
+        </MaterialUICTX>
+      </ThemeUICTX>
     </div>
   );
 }

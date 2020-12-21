@@ -9,7 +9,8 @@ export default function About() {
     <Layout
       title="about"
       description="description about title page"
-      keywords="codict, computer,science, web, development">
+      keywords="codict, computer,science, web, development"
+      noInput>
       <Text as="h1">Why?</Text>
       <Text as="p">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque nisl

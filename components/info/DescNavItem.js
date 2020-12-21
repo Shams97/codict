@@ -8,6 +8,11 @@ import Badge from "@material-ui/core/Badge";
 
 export default function DescNavItem({ social }) {
   const router = useRouter();
+  const handleEdit = (e) => {
+    e.preventDefault();
+    router.replace("/edit");
+  };
+
   const _SX = {
     socialItem: {
       backgroundColor: "background",
@@ -28,10 +33,7 @@ export default function DescNavItem({ social }) {
   return social.name === "edit" ? (
     <li sx={_SX.socialItem}>
       <IconButton
-        onClick={(e) => {
-          e.preventDefault();
-          router.replace("/edit-word");
-        }}
+        onClick={handleEdit}
         disableRipple
         aria-label={social.name}
         sx={{ ":focus": { outline: "none" } }}>

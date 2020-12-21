@@ -39,6 +39,22 @@ const theme = merge(deep, {
       top: "20%",
     },
   },
+  forms: {
+    input: {
+      borderColor: "text",
+      "&:focus": {
+        borderColor: "primary",
+        outline: "none",
+      },
+    },
+    select: {
+      borderColor: "text",
+      "&:focus": {
+        borderColor: "primary",
+        outline: "none",
+      },
+    },
+  },
 });
 
 export default theme;

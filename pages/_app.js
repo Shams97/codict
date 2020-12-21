@@ -13,10 +13,36 @@ import {
   faLink,
   faBook,
   faVideo,
+  faCheck,
 } from "@fortawesome/free-solid-svg-icons";
-import { faJs, faLinux } from "@fortawesome/free-brands-svg-icons";
+import {
+  faJs,
+  faLinux,
+  faJava,
+  faNodeJs,
+  faJenkins,
+  faJoomla,
+  faCss3Alt,
+  faAngular,
+  faSass,
+  faRaspberryPi,
+  faMagento,
+  faLaravel,
+  faBootstrap,
+  faWordpressSimple,
+  faReact,
+  faLess,
+  faPython,
+  faGulp,
+  faGrunt,
+  faHtml5,
+  faLinode,
+  faUbuntu,
+} from "@fortawesome/free-brands-svg-icons";
 import { library } from "@fortawesome/fontawesome-svg-core";
+
 library.add(
+  faCheck,
   faMicrophoneAlt,
   faCaretLeft,
   faCaretRight,
@@ -30,7 +56,27 @@ library.add(
   faSwimmingPool,
   faLink,
   faBook,
-  faVideo
+  faVideo,
+  faJava,
+  faNodeJs,
+  faJenkins,
+  faJoomla,
+  faCss3Alt,
+  faAngular,
+  faSass,
+  faRaspberryPi,
+  faMagento,
+  faLaravel,
+  faBootstrap,
+  faWordpressSimple,
+  faReact,
+  faLess,
+  faPython,
+  faGulp,
+  faGrunt,
+  faHtml5,
+  faLinode,
+  faUbuntu
 );
 
 function MyApp({ Component, pageProps }) {

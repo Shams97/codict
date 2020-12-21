@@ -14,7 +14,7 @@ const NoOptionsMessage = (props) => {
         className="mt-4 mb-2"
         onClick={(e) => {
           e.preventDefault();
-          router.replace("/add-new-word");
+          router.replace("/new");
         }}>
         ADD
       </Button>
