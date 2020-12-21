@@ -5,7 +5,7 @@ const theme = merge(deep, {
   colors: {
     ...deep.colors,
     modes: {
-      dark: {
+      light: {
         ...base.colors,
       },
     },
@@ -37,6 +37,22 @@ const theme = merge(deep, {
       justifyContent: "center",
       position: "sticky",
       top: "20%",
+    },
+  },
+  forms: {
+    input: {
+      borderColor: "text",
+      "&:focus": {
+        borderColor: "primary",
+        outline: "none",
+      },
+    },
+    select: {
+      borderColor: "text",
+      "&:focus": {
+        borderColor: "primary",
+        outline: "none",
+      },
     },
   },
 });

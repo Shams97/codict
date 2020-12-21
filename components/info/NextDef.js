@@ -29,6 +29,7 @@ const _SX = {
   },
 };
 export default function NextDef({ availableWords }) {
+<<<<<<< HEAD
   const { counter, setCounter, wordsCount, words } = availableWords;
   const handleNextDescription = (e) => {
     e.preventDefault();
@@ -38,15 +39,25 @@ export default function NextDef({ availableWords }) {
     } else {
       return;
     }
+=======
+  const { counter, setCounter, wordsCount } = availableWords;
+  const handleNextDescription = (e) => {
+    e.preventDefault();
+    if (counter < wordsCount) setCounter(counter + 1);
+>>>>>>> 7db3f380a149de84ab99e0ec5b4fa0264cff83b4
   };
 
   const hadnlePrevDescription = (e) => {
     e.preventDefault();
+<<<<<<< HEAD
     if (counter > 1) {
       setCounter(counter - 1);
     } else {
       return;
     }
+=======
+    if (counter > 1) setCounter(counter - 1);
+>>>>>>> 7db3f380a149de84ab99e0ec5b4fa0264cff83b4
   };
   return (
     <li className="ml-auto" sx={_SX.li}>

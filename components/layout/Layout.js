@@ -3,13 +3,16 @@
 import { jsx } from "theme-ui";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { ThemeProvider, useThemeUI } from "theme-ui";
-import base from "../styles/theme";
-import AppNav from "../components/Navbar";
+import AppNav from "../navbar/Navbar";
 import { Container, Row, Col } from "reactstrap";
-import CreatableSelect, { components } from "react-select";
+import CreatableSelect from "react-select";
 import { useContext } from "react";
-import { wordsCtx } from "../ctx/words/wordsCtx";
+import { wordsCtx } from "../../ctx/words/wordsCtx";
+import Menu from "./Menu";
+import Option from "./Option";
+import NoOptionsMessage from "./NoOptionMessage";
+import ThemeUICTX from "../../ctx/themes/ThemeUI-Ctx";
+import MaterialUICTX from "../../ctx/themes/MateriaUI-Ctx";
 
 const defaultKeywords = [
   "computer",
@@ -22,6 +25,7 @@ const defaultKeywords = [
   "linux",
 ];
 
+<<<<<<< HEAD:components/Layout.js
 const Option = ({ children, ...props }) => {
   const themeUiCtx = useThemeUI();
   const { colorMode } = themeUiCtx;
@@ -61,11 +65,14 @@ const Menu = ({ children, ...props }) => {
   );
 };
 
+=======
+>>>>>>> 7db3f380a149de84ab99e0ec5b4fa0264cff83b4:components/layout/Layout.js
 export default function Layout({
   children,
   title,
   description,
   keywords = defaultKeywords,
+  noInput = false,
 }) {
   const _SX = {
     header: {
@@ -112,6 +119,7 @@ export default function Layout({
         <meta property="og:title" content={title} key="ogtitle" />
         <meta property="og:description" content={description} key="ogdesc" />
       </Head>
+<<<<<<< HEAD:components/Layout.js
       <ThemeProvider theme={base}>
         <header sx={_SX.header}>
           <AppNav />
@@ -142,6 +150,45 @@ export default function Layout({
           </Container>
         </main>
       </ThemeProvider>
+=======
+      <ThemeUICTX>
+        <MaterialUICTX>
+          <header sx={_SX.header}>
+            <AppNav />
+          </header>
+          <main>
+            <Container>
+              {noInput ? (
+                <Row>
+                  <Col md="12 mt-4">{children}</Col>
+                </Row>
+              ) : (
+                <Row>
+                  <Col xs="12" md="8" className="mx-auto my-4">
+                    {title !== "about" && (
+                      <CreatableSelect
+                        id="1"
+                        instanceId="1"
+                        inputId="1"
+                        name="words"
+                        isClearable
+                        isSearchable
+                        components={{ Option, Menu, NoOptionsMessage }}
+                        onChange={handleChange}
+                        onInputChange={handleInputChange}
+                        options={words}
+                      />
+                    )}
+                  </Col>
+
+                  <Col md="12 mt-4">{children}</Col>
+                </Row>
+              )}
+            </Container>
+          </main>
+        </MaterialUICTX>
+      </ThemeUICTX>
+>>>>>>> 7db3f380a149de84ab99e0ec5b4fa0264cff83b4:components/layout/Layout.js
     </div>
   );
 }

@@ -1,11 +1,11 @@
 /**@jsxRuntime classic */
 /**@jsx jsx */
-import { jsx, Box, Input, Text } from "theme-ui";
+import { jsx, Text } from "theme-ui";
 import { useState } from "react";
 import Link from "next/link";
 import { Collapse, Navbar, NavbarToggler, Nav } from "reactstrap";
 import ToggleColors from "./toggleColorMode";
-import CustomNavItem from "../components/CustomNavItem";
+import CustomNavItem from "./CustomNavItem";
 
 const AppNav = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -63,7 +63,9 @@ const AppNav = () => {
         <div sx={_SX.navbarBrand} className="p-2">
           <Link href="/" passHref>
             <a sx={_SX.navbarBrandAnchor}>
-              <Text as="h1">codict</Text>
+              <Text as="h1">
+                c<span sx={{ color: "chartreuse" }}>o</span>dict
+              </Text>
             </a>
           </Link>
           <NavbarToggler type="submit" onClick={toggle} sx={_SX.toggler}>
