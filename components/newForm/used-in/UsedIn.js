@@ -1,10 +1,11 @@
 /**@jsxRuntime classic */
 /**@jsx jsx */
 
-import { jsx, Box } from "theme-ui";
-import { useContext, useEffect, useState } from "react";
+import { jsx } from "theme-ui";
+import { useContext, useEffect } from "react";
 import { newFormCTX } from "../../../ctx/forms/new/newFormCTX";
 import Item from "./Item";
+import { Row, Col, Container } from "reactstrap";
 
 import {
   generateframeWorksIcons,
@@ -53,29 +54,33 @@ export default function UsedIn({}) {
   }, []);
 
   return (
-    <Box as="form">
-      <div>
-        {options.map((opt, i) => {
-          return (
-            <div key={i}>
-              <h5 className="mt-3 mb-2 text-center">
-                {opt.type}{" "}
-                {!newFormCtxState.next && (
-                  <span sx={{ fontSize: "10px", color: "primary" }}>
-                    (Pick one)
-                  </span>
-                )}
-              </h5>
+    <Container className="w-100">
+      {options.map((opt, i) => {
+        return (
+          <Row key={i} className="d-flex flex-column mt-4">
+            <h5 className="mt-4 mb-2 text-center">
+              {opt.type}{" "}
+              {!newFormCtxState.next && (
+                <span sx={{ fontSize: "10px", color: "primary" }}>
+                  (Pick one)
+                </span>
+              )}
+            </h5>
 
-              <div className="d-flex justify-content-center">
-                {opt.list.map((item, idx) => {
-                  return <Item item={item} key={idx} category={opt.label} />;
-                })}
-              </div>
+            <div
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                flexWrap: "wrap",
+              }}
+            >
+              {opt.list.map((item, idx) => {
+                return <Item item={item} key={idx} category={opt.label} />;
+              })}
             </div>
-          );
-        })}
-      </div>
-    </Box>
+          </Row>
+        );
+      })}
+    </Container>
   );
 }

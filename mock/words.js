@@ -15,11 +15,7 @@ const mockedWords = [
       title: "Js",
     },
     db: {
-<<<<<<< HEAD
-      user: "user_xxsa1",
-=======
       user: "mustafaKamal-fe",
->>>>>>> 7db3f380a149de84ab99e0ec5b4fa0264cff83b4
       name: "Js",
       sound: "Jay-ess",
       description:
@@ -93,32 +89,16 @@ const mockedWords = [
       title: "Js",
     },
     db: {
-<<<<<<< HEAD
-      user: "user2",
-      name: "Js",
-      sound: "Jay-ess",
-      description:
-        "second description of javasxrio[t second description of javasxrio[t second description of javasxrio[t second description of javasxrio[t second description of javasxrio[t second description of javasxrio[tsecond description of javasxrio[t",
-=======
       user: "mustafaKamal",
       name: "Js",
       sound: "Jay-ess",
       description:
-        "second description abuot javsxcript second description abuot javsxcript second description abuot javsxcript second description abuot javsxcript second description abuot javsxcript",
->>>>>>> 7db3f380a149de84ab99e0ec5b4fa0264cff83b4
+        "second description abuot javsxcript second description javsxcript second description abuot javsxcript second description abuot javsxcript second description abuot javsxcript",
       social: [
         { name: "like", count: 0, icon: "thumbs-up", color: "green" },
         { name: "dislike", count: 2, icon: "heart-broken", color: "red" },
         { name: "edit", icon: "edit", color: "secondary" },
       ],
-<<<<<<< HEAD
-      usedInLang: ["javascript"],
-      usedInField: ["software development"],
-      usedInOs: ["linux", "windows", "osx", "iosx"],
-      articleLinks: ["/link-1", "/link-2", "/link-3", "/link-4"],
-      videoLinks: ["/link-1", "/link-2", "/link-3", "/link-4"],
-      booksLinks: ["/link-1", "/link-2", "/link-3", "/link-4"],
-=======
       used: [
         {
           in: [{ name: "js", prefix: "fab", bgColor: "yellow" }],
@@ -154,7 +134,6 @@ const mockedWords = [
         { dest: "www.google.com", title: "intro to SSR" },
         { dest: "www.google.com", title: "What is React" },
       ],
->>>>>>> 7db3f380a149de84ab99e0ec5b4fa0264cff83b4
       synonyms: ["javascript", "js", "JS", "es", "ecmascript"],
     },
   },

@@ -38,6 +38,14 @@ import {
   faHtml5,
   faLinode,
   faUbuntu,
+  faPhp,
+  faSwift,
+  faRust,
+  faRedhat,
+  faSuse,
+  faFedora,
+  faCentos,
+  faWindows,
 } from "@fortawesome/free-brands-svg-icons";
 import { library } from "@fortawesome/fontawesome-svg-core";
 
@@ -76,7 +84,16 @@ library.add(
   faGrunt,
   faHtml5,
   faLinode,
-  faUbuntu
+  faUbuntu,
+  faPhp,
+  faSwift,
+  faRust,
+  faUbuntu,
+  faRedhat,
+  faSuse,
+  faFedora,
+  faCentos,
+  faWindows
 );
 
 function MyApp({ Component, pageProps }) {

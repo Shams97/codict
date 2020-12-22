@@ -13,6 +13,7 @@ import NameAndSound from "../../components/newForm/NameAndSound";
 import { newFormCTX } from "../../ctx/forms/new/newFormCTX";
 import Description from "./Description";
 import UsedIn from "./used-in/UsedIn";
+import UsefullTemplate from "./usefull/UsefullTemplate";
 function getSteps() {
   return [
     "Name and Sound ",
@@ -33,6 +34,12 @@ function getStepContent(step) {
       return <Description />;
     case 2:
       return <UsedIn />;
+    case 3:
+      return <UsefullTemplate />;
+    case 4:
+      return <UsefullTemplate />;
+    case 5:
+      return <UsefullTemplate />;
     default:
       return "Unknown step";
   }
@@ -93,7 +100,8 @@ export default function CustomStepper() {
                       sx={_SX.back}
                       variant="contained"
                       disabled={activeStep === 0}
-                      onClick={handleBack}>
+                      onClick={handleBack}
+                    >
                       Back
                     </Button>
                   )}
@@ -102,7 +110,8 @@ export default function CustomStepper() {
                     css={_SX.next}
                     disabled={!newFormState.next}
                     variant="contained"
-                    onClick={handleNext}>
+                    onClick={handleNext}
+                  >
                     {activeStep === steps.length - 1 ? "Finish" : "Next"}
                   </Button>
                 </div>

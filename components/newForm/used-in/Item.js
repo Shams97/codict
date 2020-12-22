@@ -5,7 +5,6 @@ import { jsx } from "theme-ui";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { newFormCTX } from "../../../ctx/forms/new/newFormCTX";
 import { useState, useContext, useEffect } from "react";
-import { object } from "joi";
 
 const _SX = {
   root: {
@@ -19,6 +18,9 @@ const _SX = {
     ":hover span": {
       cursor: "pointer",
     },
+    "@media(max-width: 768px)": {
+      margin: "1rem",
+    },
   },
 };
 
@@ -27,57 +29,88 @@ export default function Item(props) {
   const [selected, setSelected] = useState(false);
   const [newFormCtxState, setNewFormCtxState] = useContext(newFormCTX);
 
+  /**
+   * Loop through the sets of formData.usedIn and check if they have meet the form
+   * rule. the rule is, user must select at least one item from each category (category is either languges, os, ...)
+   * if condition is met, next button is enabled
+   */
   const checkCount = () => {
     const values = Object.values(newFormCtxState.formData.usedIn);
-    const keys = Object.keys(newFormCtxState.formData.usedIn);
-    for (let i = 0; i < keys.length; i++) {
-      if (values[i].length < 1) {
+    for (let i = 0; i < values.length; i++) {
+      if (values[i].size < 1) {
         return false;
       }
     }
+
     return true;
   };
 
   const handleSelected = (e) => {
     e.preventDefault();
+    if (selected) {
+      // item was selected
 
-    // UI
-    setSelected(!selected);
+      // UI
+      setSelected(!selected);
 
-    if (!e.target.title) {
-      e.target.title = item.name[1];
-    }
+      // if item has no title give it one  (for svg and path tags)
+      if (!e.target.title) {
+        e.target.title = item.name[1];
+      }
+      // remove from set (because it was de-selected)
+      const tempSet = new Set(newFormCtxState.formData.usedIn[category]);
+      tempSet.delete(e.target.title);
 
-    /**
-     * TODO:
-     * 1- fix formData.usedIn values (languages, os, ...) to only add new entries (no duplicates)
-     * 2- try using Js sets
-     * 3- polish all code
-     * 4- commit
-     * 5- continue with the rest of the form
-     */
-    setNewFormCtxState({
-      ...newFormCtxState,
-      formData: {
-        ...newFormCtxState.formData,
-        usedIn: {
-          ...newFormCtxState.formData.usedIn,
-          [category]: [
-            ...newFormCtxState.formData.usedIn[category],
-            e.target.title,
-          ],
+      // update context
+      setNewFormCtxState({
+        ...newFormCtxState,
+        formData: {
+          ...newFormCtxState.formData,
+          usedIn: {
+            ...newFormCtxState.formData.usedIn,
+            [category]: tempSet,
+          },
         },
-      },
-    });
+      });
+    } else {
+      /**
+       * item is not selected
+       */
+
+      // update UI
+      setSelected(!selected);
+
+      // if item has no title give it one  (for svg and path tags)
+      if (!e.target.title) {
+        e.target.title = item.name[1];
+      }
+
+      // add to set
+      const tempSet = new Set(newFormCtxState.formData.usedIn[category]);
+      tempSet.add(e.target.title);
+
+      // udpate context
+      setNewFormCtxState({
+        ...newFormCtxState,
+        formData: {
+          ...newFormCtxState.formData,
+          usedIn: {
+            ...newFormCtxState.formData.usedIn,
+            [category]: tempSet,
+          },
+        },
+      });
+    }
   };
 
   //   enable next button when user has selected at least on option from each category
   useEffect(() => {
     if (checkCount()) setNewFormCtxState({ ...newFormCtxState, next: true });
+    else setNewFormCtxState({ ...newFormCtxState, next: false });
   }, [selected]);
 
   return (
-    <div sx={_SX.root} className="mx-2">
+    <div sx={_SX.root} className="mx-3">
       {item.isIcon ? (
         <FontAwesomeIcon
           onClick={handleSelected}

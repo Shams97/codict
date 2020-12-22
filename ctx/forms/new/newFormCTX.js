@@ -10,7 +10,12 @@ export default function NewFormCtx({ children }) {
       name: "",
       sound: "",
       description: "",
-      usedIn: { languages: [], os: [], frameWorks: [], principles: [] },
+      usedIn: {
+        languages: new Set(),
+        os: new Set(),
+        frameWorks: new Set(),
+        principles: new Set(),
+      },
     },
   });
 
