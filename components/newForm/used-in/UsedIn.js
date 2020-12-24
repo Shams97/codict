@@ -5,7 +5,7 @@ import { jsx } from "theme-ui";
 import { useContext, useEffect } from "react";
 import { newFormCTX } from "../../../ctx/forms/new/newFormCTX";
 import Item from "./Item";
-import { Row, Col, Container } from "reactstrap";
+import { Row, Container } from "reactstrap";
 
 import {
   generateframeWorksIcons,
@@ -50,7 +50,19 @@ export default function UsedIn({}) {
 
   //   every new render/rerender(when click 'back') reset next button
   useEffect(() => {
-    setNewFormCtxState({ ...newFormCtxState, next: false });
+    setNewFormCtxState({
+      ...newFormCtxState,
+      formData: {
+        ...newFormCtxState.formData,
+        usedIn: {
+          languages: new Set(),
+          os: new Set(),
+          frameWorks: new Set(),
+          principles: new Set(),
+        },
+      },
+      next: false,
+    });
   }, []);
 
   return (

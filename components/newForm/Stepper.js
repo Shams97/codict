@@ -14,6 +14,9 @@ import { newFormCTX } from "../../ctx/forms/new/newFormCTX";
 import Description from "./Description";
 import UsedIn from "./used-in/UsedIn";
 import UsefullTemplate from "./usefull/UsefullTemplate";
+import Synonyms from "../newForm/Synonyms";
+import { useRouter } from "next/router";
+
 function getSteps() {
   return [
     "Name and Sound ",
@@ -35,13 +38,13 @@ function getStepContent(step) {
     case 2:
       return <UsedIn />;
     case 3:
-      return <UsefullTemplate />;
+      return <UsefullTemplate type="links" />;
     case 4:
-      return <UsefullTemplate />;
+      return <UsefullTemplate type="videos" />;
     case 5:
-      return <UsefullTemplate />;
-    default:
-      return "Unknown step";
+      return <UsefullTemplate type="books" />;
+    case 6:
+      return <Synonyms />;
   }
 }
 
@@ -51,6 +54,7 @@ export default function CustomStepper() {
   const context = useThemeUI();
   const { theme } = context;
   const [newFormState, _] = useContext(newFormCTX);
+  const router = useRouter();
   const _SX = {
     back: {
       color: theme.colors.text,
@@ -72,8 +76,16 @@ export default function CustomStepper() {
     },
   };
   const handleNext = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
-    console.log(newFormState);
+    if (activeStep === steps.length - 1) {
+      setActiveStep((prevActiveStep) => prevActiveStep + 1);
+      // send data over to api and wait for resonse
+
+      //on success navigate to the new word page
+
+      // on failure display error message and keep user at the same page either to fix errors or to try again
+    } else {
+      setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    }
   };
 
   const handleBack = () => {
@@ -123,7 +135,14 @@ export default function CustomStepper() {
       {activeStep === steps.length && (
         <Paper square elevation={0}>
           <Typography>All steps completed - you&apos;re finished</Typography>
-          <Button onClick={handleReset}>Reset</Button>
+          <Button
+            className="mt-4 mx-2"
+            sx={_SX.back}
+            variant="contained"
+            onClick={handleReset}
+          >
+            Reset
+          </Button>
         </Paper>
       )}
     </div>
