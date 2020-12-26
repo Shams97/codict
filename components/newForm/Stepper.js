@@ -84,6 +84,7 @@ export default function CustomStepper() {
 
       // on failure display error message and keep user at the same page either to fix errors or to try again
     } else {
+      console.log(newFormState);
       setActiveStep((prevActiveStep) => prevActiveStep + 1);
     }
   };
