@@ -103,6 +103,7 @@ export default function Layout({
                         onChange={handleChange}
                         onInputChange={handleInputChange}
                         options={words}
+                        placeholder="Search"
                       />
                     )}
                   </Col>

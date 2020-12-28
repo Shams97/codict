@@ -17,7 +17,8 @@ const _SX = {
   header: {
     display: "flex",
     alignItems: "center",
-    marginBottom: "2rem",
+    margin: "5rem 0 1rem 0",
+    justifyContent: "center",
   },
 };
 
@@ -54,19 +55,28 @@ export default function WordPage({ words, options }) {
             lg="6"
             sx={{
               marginTop: "4rem",
-            }}>
+            }}
+          >
             <InfoTable words={words} counter={counter} />
           </Col>
         </Row>
         <Row>
-          <Col md="8" lg="6" className="mx-auto mt-4">
+          <Col className="mx-auto mt-4 col-12">
             <div sx={_SX.header}>
               <FontAwesomeIcon icon="swimming-pool" width={50} height={50} />
               <h2 className="ml-3">Dive Deeper:</h2>
             </div>
-            <Lists words={words} counter={counter} links />
-            <Lists words={words} counter={counter} videos />
-            <Lists words={words} counter={counter} books />
+            <Row>
+              <Col>
+                <Lists words={words} counter={counter} links />
+              </Col>
+              <Col>
+                <Lists words={words} counter={counter} videos />
+              </Col>
+              <Col>
+                <Lists words={words} counter={counter} books />
+              </Col>
+            </Row>
 
             <Row className="my-4">
               <Synonyms words={words} counter={counter} />

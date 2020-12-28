@@ -1,4 +1,3 @@
-import { Tune } from "@material-ui/icons";
 import Joi from "joi";
 
 export const nameSchema = Joi.object({

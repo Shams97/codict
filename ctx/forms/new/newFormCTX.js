@@ -1,6 +1,19 @@
 import { createContext, useState } from "react";
 
-const defaultValue = { next: false };
+const defaultValue = {
+  next: false,
+  formData: {
+    name: "",
+    sound: "",
+    description: "",
+    usedIn: {
+      languages: new Set(),
+      os: new Set(),
+      frameWorks: new Set(),
+      principles: new Set(),
+    },
+  },
+};
 export const newFormCTX = createContext(defaultValue);
 
 export default function NewFormCtx({ children }) {

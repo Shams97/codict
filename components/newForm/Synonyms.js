@@ -62,12 +62,17 @@ export default function Synonyms() {
 
   return (
     <div>
+      <Input
+        value={type}
+        className="border mt-4"
+        onChange={handleChange}
+      ></Input>
       <div className="mt-4 d-flex justify-content-center flex-wrap">
         {words.map((w, i) => {
           return (
             <div
               sx={_SX.tag}
-              className="border px-2 py-1 mx-2 d-flex align-items-center"
+              className="border px-2 py-1 mx-2 d-flex align-items-center mt-4"
               key={i}
             >
               {w}
@@ -83,11 +88,6 @@ export default function Synonyms() {
           );
         })}
       </div>
-      <Input
-        value={type}
-        className="border mt-4"
-        onChange={handleChange}
-      ></Input>
     </div>
   );
 }

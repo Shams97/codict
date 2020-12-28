@@ -37,15 +37,16 @@ export default function Lists({
 
   const _SX = {
     root: { marginTop: "3rem" },
-    headerIcon: {
-      color:
-        header === "Books" ? "text" : header === "Videos" ? "red" : "primary",
-    },
+
     links: {
       transition: "height 1s linear",
       position: "relative",
       height: CTX.length > 5 && more === false ? "120px" : "auto",
       overflow: "hidden",
+      "& a": {
+        color: "text",
+      },
+      margin: "auto",
     },
     arrowDown: {
       display: more ? "none" : "flex",
@@ -87,7 +88,7 @@ export default function Lists({
 
   return (
     <div sx={_SX.root}>
-      <h5>
+      <h5 className="mb-4">
         <FontAwesomeIcon
           icon={
             header === "Books" ? "book" : header === "Videos" ? "video" : "link"
@@ -97,7 +98,6 @@ export default function Lists({
           className="mx-3"
           sx={_SX.headerIcon}
         />
-        {header}:
       </h5>
       <ul sx={_SX.links}>
         {CTX.map((link, i) => {

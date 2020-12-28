@@ -1,9 +1,9 @@
 import { createContext, useState } from "react";
 const defaultValue = {
-  languages: { all: false, none: false },
-  os: { all: false, none: false },
-  frameWorks: { all: false, none: false },
-  principles: { all: false, none: false },
+  languages: { all: false, none: false, isNoneOption: false },
+  os: { all: false, none: false, isNoneOption: false },
+  frameWorks: { all: false, none: false, isNoneOption: false },
+  principles: { all: false, none: false, isNoneOption: false },
 };
 
 // default context state

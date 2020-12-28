@@ -8,7 +8,7 @@ export default function Synonyms({ words, counter }) {
   return (
     <Fragment>
       <Col xs="12">
-        <h5>Synonyms:</h5>
+        <h5 className="mt-4">Synonyms:</h5>
       </Col>
       <Col xs="12">
         <ul
@@ -19,22 +19,24 @@ export default function Synonyms({ words, counter }) {
               flexDirection: "column",
               alignItems: "flex-start",
             },
-            justifyContent: "space-between",
-          }}>
+            justifyContent: "center",
+          }}
+        >
           {words[counter].db.synonyms.map((term, i) => {
             return (
               <li
-                className="my-1"
-                key={i}
+                className="my-1 mx-3 px-3 py-1"
                 sx={{
-                  display: "inline-block",
-                  fontSize: "14px",
+                  border: "1px solid",
+                  borderColor: "text",
+                  borderRadius: "10px",
                   ":hover": {
+                    backgroundColor: "highlight",
                     cursor: "pointer",
-                    color: "highlight",
                   },
-                  padding: "5px",
-                }}>
+                }}
+                key={i}
+              >
                 {term}
               </li>
             );

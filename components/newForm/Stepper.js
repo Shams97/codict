@@ -54,7 +54,7 @@ export default function CustomStepper() {
   const context = useThemeUI();
   const { theme } = context;
   const [newFormState, _] = useContext(newFormCTX);
-  const router = useRouter();
+
   const _SX = {
     back: {
       color: theme.colors.text,
@@ -75,9 +75,11 @@ export default function CustomStepper() {
       },
     },
   };
+
   const handleNext = () => {
     if (activeStep === steps.length - 1) {
       setActiveStep((prevActiveStep) => prevActiveStep + 1);
+      console.log(newFormState);
       // send data over to api and wait for resonse
 
       //on success navigate to the new word page
