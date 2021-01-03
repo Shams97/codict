@@ -5,9 +5,6 @@ export const wordsArchive = [
 
 const mockedWords = [
   {
-    params: "Js",
-  },
-  {
     id: 0,
     seo: {
       description: "description about javascript",

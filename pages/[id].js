@@ -3,9 +3,8 @@
 import { jsx } from "theme-ui";
 import { useContext, useState } from "react";
 import Layout from "../components/layout/Layout";
-import mockedWords, { wordsArchive } from "../mock/words";
 import { wordsCtx } from "../ctx/words/wordsCtx";
-import useLabels from "../lib/useLabels";
+import useLabels from "../lib/pages/useLabels";
 import { Col, Container, Row } from "reactstrap";
 import Sound from "../components/info/Sound";
 import Description from "../components/info/Description";
@@ -25,14 +24,30 @@ const _SX = {
 export default function WordPage({ words, options }) {
   const [_, spreadWords] = useContext(wordsCtx);
   // counter should always star at 1, this where rendered words data start off
-  const [counter, setCounter] = useState(1);
-
+  const [counter, setCounter] = useState(0);
   useLabels(options, spreadWords);
 
   return (
     <Layout>
       <Container>
         <Row>
+          {/* temporary page TODO list */}
+          <div
+            sx={{
+              position: "fixed",
+              bottom: "0",
+              right: "0",
+              border: "1px solid",
+            }}
+          >
+            <ul>
+              <li>page is not protected</li>
+              <li>
+                page is pre-built using <code>getStaticPaths</code> then{" "}
+                <code>getStaticProps</code>
+              </li>
+            </ul>
+          </div>
           <Col className="mx-auto" xs="12" md="7" lg="8">
             <Sound
               sound={words[counter].db.sound}
@@ -89,9 +104,12 @@ export default function WordPage({ words, options }) {
 }
 
 export async function getStaticPaths() {
-  const paths = wordsArchive.map((word) => {
+  //fetch words from DB
+  const res = await fetch("http://localhost:3000/api/archive");
+  const json = await res.json();
+  const paths = json.data.map((entry) => {
     return {
-      params: { id: word.label },
+      params: { id: entry.value },
     };
   });
 
@@ -102,8 +120,19 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  const options = wordsArchive;
-  const words = mockedWords;
+  //fetch words from DB
+  const listRes = await fetch("http://localhost:3000/api/archive");
+  const ListJson = await listRes.json();
 
-  return { props: { words, options }, revalidate: 1 };
+  // fetch pages based on words available at DB
+  const wordsRes = await fetch(`http://localhost:3000/api/${params.id}`);
+  const wordsJson = await wordsRes.json();
+
+  return {
+    props: {
+      words: wordsJson.formated,
+      options: ListJson.data,
+    },
+    revalidate: 1,
+  };
 }

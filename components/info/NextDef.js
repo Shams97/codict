@@ -36,7 +36,7 @@ export default function NextDef({ availableWords }) {
 
   const hadnlePrevDescription = (e) => {
     e.preventDefault();
-    if (counter > 1) setCounter(counter - 1);
+    if (counter >= 1) setCounter(counter - 1);
   };
   return (
     <li className="ml-auto" sx={_SX.li}>

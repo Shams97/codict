@@ -60,7 +60,6 @@ export default function InfoTable({ words, counter }) {
                       icon={[list.prefix, list.name]}
                       width={20}
                       height={20}
-                      sx={{ color: list.bgColor }}
                     />
                   </td>
                 ) : (

@@ -14,7 +14,7 @@ const _SX = {
   },
 };
 
-export default function NameAndSound({}) {
+export default function NameAndSound() {
   const [newFormCtxState, setNewFormCtxState] = useContext(newFormCTX);
   const [name, setName] = useState("");
   const [sound, setSound] = useState("");

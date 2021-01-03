@@ -7,10 +7,24 @@ import Layout from "../components/layout/Layout";
 export default function About() {
   return (
     <Layout
-      title="about"
-      description="description about title page"
-      keywords="codict, computer,science, web, development"
-      noInput>
+      title="About"
+      keywords="codict, computer, science, terms, software, development, web, development, software engineering, words"
+      description="Code dictionary or, codict, is a place where Computer Science and Computer Engineering technical terms and terminology live. If while you learn something, and come across some term/word that makes no sense to you, use codict search box to find out about."
+      includeSearchInput={false}
+    >
+      {/* temporary page TODO list */}
+      <div
+        sx={{
+          position: "fixed",
+          bottom: "0",
+          right: "0",
+          border: "1px solid",
+        }}
+      >
+        <ul>
+          <li>page is not protected</li>
+        </ul>
+      </div>
       <Text as="h1">Why?</Text>
       <Text as="p">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque nisl
@@ -33,7 +47,8 @@ export default function About() {
           flexDirection: "row",
           justifyContent: "center",
           alignItems: "flex-start",
-        }}>
+        }}
+      >
         <Col sm="12 my-4" md="4">
           <SuppotrCard />
         </Col>

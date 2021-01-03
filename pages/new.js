@@ -7,9 +7,28 @@ import NewFormCtx from "../ctx/forms/new/newFormCTX";
 
 export default function New({}) {
   return (
-    <Layout noInput>
+    <Layout includeSearchInput={false}>
       <NewFormCtx>
-        <CustomStepper />
+        {/* temporary page TODO list */}
+        <div
+          sx={{
+            position: "fixed",
+            bottom: "0",
+            right: "0",
+            border: "1px solid",
+          }}
+        >
+          <ul>
+            <li>
+              page is <b>protected</b>
+            </li>
+            <li>
+              page is static and uses <code>AJAX</code> to send user collected
+              data
+            </li>
+          </ul>
+        </div>
+        <CustomStepper newWord />
       </NewFormCtx>
     </Layout>
   );
