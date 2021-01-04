@@ -47,17 +47,18 @@ const All = ({ label, setOptionUIstate }) => {
     // update none UI (remove check mark)
     setAllNoneState({ all: true, none: false });
 
-    // update form context state
-
+    // update form context state with only the category in question
+    /**
+     * label is one of languages, os, frameworks,..
+     * category is the list of all options available in this category
+     */
     setFormCtxState({
       ...formCtxState,
       formData: {
         ...formCtxState.formData,
         usedIn: {
-          languages: new Set(langIconsNames()),
-          os: new Set(osIconsNames()),
-          frameWorks: new Set(frameWorksIconsNames()),
-          principles: new Set(principlesIconsNames()),
+          ...formCtxState.formData.usedIn,
+          [label]: category,
         },
       },
     });

@@ -2,12 +2,11 @@
 /**@jsx jsx */
 
 import { jsx } from "theme-ui";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState, useContext } from "react";
 import { newFormCTX } from "../../../ctx/forms/new/newFormCTX";
 import { allNoneCtx } from "../../../ctx/forms/new/allNoneCtx";
 
-const None = ({ optionUIstate, setOptionUIstate }) => {
+const None = ({ optionUIstate, setOptionUIstate, label }) => {
   const [formCtxState, setFormCtxState] = useContext(newFormCTX);
   const [allNoneState, setAllNoneState] = useContext(allNoneCtx);
   const [select, setSelect] = useState(false);
@@ -27,16 +26,18 @@ const None = ({ optionUIstate, setOptionUIstate }) => {
     // update UI for "All" option
     setAllNoneState({ none: true, all: false });
 
-    // update form context to none
+    /**
+     *  update form context to none
+     *  update form context state with only the category in question
+     *  label is one of languages, os, frameworks,..
+     */
     setFormCtxState({
       ...formCtxState,
       formData: {
         ...formCtxState.formData,
         usedIn: {
-          languages: new Set(),
-          os: new Set(),
-          frameWorks: new Set(),
-          principles: new Set(),
+          ...formCtxState.formData.usedIn,
+          [label]: new Set(),
         },
       },
     });

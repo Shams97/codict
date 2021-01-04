@@ -5,6 +5,7 @@ import { Card, CardBody, CardFooter, Col, Row } from "reactstrap";
 import NextDef from "../info/NextDef";
 import DescNavItem from "../info/DescNavItem";
 import Quote from "../info/Quote";
+
 const _SX = {
   card: {
     backgroundColor: "background",
@@ -28,7 +29,9 @@ const _SX = {
 };
 
 export default function Description({ words, availableWords }) {
-  const { counter } = availableWords;
+  const { counter, wordsCount } = availableWords;
+  // value of word.is the same for all list of definitions
+  const word = words[0].db.name;
   return (
     <Row>
       <Col>
@@ -41,7 +44,15 @@ export default function Description({ words, availableWords }) {
           <CardFooter className="p-0" sx={_SX.cardFooter}>
             <ul sx={_SX.sociaList}>
               {words[counter].db.social.map((social, i) => {
-                return <DescNavItem social={social} key={i} />;
+                return (
+                  <DescNavItem
+                    social={social}
+                    order={counter}
+                    word={word}
+                    wordsCount={wordsCount}
+                    key={i}
+                  />
+                );
               })}
               <NextDef availableWords={availableWords} />
             </ul>

@@ -6,7 +6,6 @@ import Layout from "../components/layout/Layout";
 import { wordsCtx } from "../ctx/words/wordsCtx";
 import useLabels from "../lib/pages/useLabels";
 import { Col, Container, Row } from "reactstrap";
-import Sound from "../components/info/Sound";
 import Description from "../components/info/Description";
 import InfoTable from "../components/info/Table";
 import Lists from "../components/info/ArticleLinks";
@@ -49,10 +48,6 @@ export default function WordPage({ words, options }) {
             </ul>
           </div>
           <Col className="mx-auto" xs="12" md="7" lg="8">
-            <Sound
-              sound={words[counter].db.sound}
-              name={words[counter].db.name}
-            />
             <Description
               words={words}
               availableWords={{
@@ -128,9 +123,13 @@ export async function getStaticProps({ params }) {
   const wordsRes = await fetch(`http://localhost:3000/api/${params.id}`);
   const wordsJson = await wordsRes.json();
 
+  // sort list of words definitions based on community number of likes before building pages
+  const words = wordsJson.formated.sort((a, b) => {
+    return b.db.social[0].count - a.db.social[0].count;
+  });
   return {
     props: {
-      words: wordsJson.formated,
+      words,
       options: ListJson.data,
     },
     revalidate: 1,

@@ -54,7 +54,7 @@ const _SX = {
 export default function UsedIn({}) {
   const [newFormCtxState, setNewFormCtxState] = useContext(newFormCTX);
 
-  //every new render/rerender(when click 'back') reset next button
+  //every new render/rerender(when click 'back') reset data input and enable next button
   useEffect(() => {
     setNewFormCtxState({
       ...newFormCtxState,

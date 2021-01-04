@@ -61,6 +61,7 @@ const Icons = ({ iconList, label }) => {
       // delete from list
       prevSet.add(title);
     }
+
     // update form context data
     setFormCtxState({
       ...formCtxState,
@@ -112,7 +113,7 @@ const Icons = ({ iconList, label }) => {
           </div>
         );
       })}
-      <None setOptionUIstate={setSelect} optionUIstate={select} />
+      <None setOptionUIstate={setSelect} optionUIstate={select} label={label} />
       <All setOptionUIstate={setSelect} optionUIstate={select} label={label} />
     </div>
   );

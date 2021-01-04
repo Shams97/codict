@@ -10,7 +10,7 @@ import StepContent from "@material-ui/core/StepContent";
 import Button from "@material-ui/core/Button";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
-import NameAndSound from "../../components/newForm/NameAndSound";
+import Name from "../../components/newForm/Name";
 import { newFormCTX } from "../../ctx/forms/new/newFormCTX";
 import Description from "./Description";
 import UsedIn from "./used-in/UsedIn";
@@ -34,7 +34,7 @@ function getSteps() {
 function getStepContent(step) {
   switch (step) {
     case 0:
-      return <NameAndSound />;
+      return <Name />;
     case 1:
       return <Description />;
     case 2:
@@ -96,7 +96,7 @@ export default function CustomStepper({ newWord = false, edit = false }) {
   const handleNext = () => {
     // final step
     if (activeStep === steps.length) {
-      // loading spinner while building and waiting for request
+      // loading spinner while preparing for request
       setReqSpinner(true);
 
       //either add new word or edit one
@@ -106,17 +106,17 @@ export default function CustomStepper({ newWord = false, edit = false }) {
       } else if (edit) {
         url += "edit";
       }
-
-      /**
-       * perform API request
-       */
       // reset messgae
       setMessage({
         msg: "",
         isOk: false,
       });
-      //  sort form data
+      //  sort form data collected from UI form
       const sortedFormData = organizeFormData(newFormState.formData);
+      /**
+       * perform API request
+       */
+
       axios
         .post(url, {
           data: {
