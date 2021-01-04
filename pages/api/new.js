@@ -2,6 +2,7 @@ import addExtras from "../../lib/api/new/addExtras";
 import newFormSchema from "../../lib/api/schema";
 import connectAtlas from "../../lib/api/db/connect";
 import WordList from "../../lib/api/db/schemas/newWord";
+import mongoose from "mongoose";
 import { ValidationError } from "joi";
 const customError = new Error();
 customError.name = "duplicate";
@@ -34,12 +35,14 @@ export default async (req, res) => {
       });
 
       await doc.save();
+      await mongoose.connection.close();
       res.statusCode = 200;
       res.json({
         isOk: true,
         message: `Successfully added ${req.body.data.name}`,
       });
     } catch (e) {
+      await mongoose.connection.close();
       /**
         auth error
         server error

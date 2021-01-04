@@ -4,7 +4,7 @@ const formatDataForUI = (obj) => {
   const formated = obj.list.map((entry) => {
     return {
       seo: {
-        description: entry.description.split(" ").slice(0, 5).join(" "),
+        description: entry.description,
         keywords: [...entry.synonyms, entry.name],
         title: entry.name,
       },

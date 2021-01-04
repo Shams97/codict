@@ -24,10 +24,13 @@ export default function WordPage({ words, options }) {
   const [_, spreadWords] = useContext(wordsCtx);
   // counter should always star at 1, this where rendered words data start off
   const [counter, setCounter] = useState(0);
+  // destruct seo data from word info
+
+  const { title, description, keywords } = words[0].seo;
   useLabels(options, spreadWords);
 
   return (
-    <Layout>
+    <Layout title={title} description={description} keywords={keywords}>
       <Container>
         <Row>
           {/* temporary page TODO list */}

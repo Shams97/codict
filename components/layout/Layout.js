@@ -66,8 +66,8 @@ export default function Layout({
         <meta charSet="utf-8" />
         <link rel="icon" href="/favicon.ico" />
         {/* Twitter */}
-        <meta name="twitter:card" content="summary" key="twcard" />
-        <meta name="twitter:creator" key="twhandle" />
+        <meta name="twitter:card" content={description} key="twcard" />
+        <meta name="twitter:creator" content="codict" key="twhandle" />
 
         {/* Open Graph */}
         <meta property="og:url" content={"https://www.codict.io"} key="ogurl" />
