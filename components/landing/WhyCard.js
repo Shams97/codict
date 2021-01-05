@@ -16,8 +16,9 @@ const WhyCard = (props) => {
       </Text>
       <Box>
         <Text className="px-3 pb-3">
-          While reading something you come across a term that makes no sense to
-          you codict tells you what is going on !
+          While learning something, you come across a term that makes absolutely
+          no sense to you. Codict gives you a brief about it and further intel
+          if you wish.
         </Text>
       </Box>
     </Card>

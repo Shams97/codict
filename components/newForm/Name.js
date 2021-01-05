@@ -5,6 +5,7 @@ import { jsx, Box, Label, Input, Alert } from "theme-ui";
 import { useContext, useEffect, useState } from "react";
 import { newFormCTX } from "../../ctx/forms/new/newFormCTX";
 import { nameSchema } from "../newForm/schema/schema";
+import { useRouter } from "next/router";
 
 const _SX = {
   alert: {
@@ -14,7 +15,8 @@ const _SX = {
   },
 };
 
-export default function Name() {
+export default function Name({ edit }) {
+  const router = useRouter();
   const [newFormCtxState, setNewFormCtxState] = useContext(newFormCTX);
   const [name, setName] = useState("");
   const [nameAlert, setNameAlert] = useState("");
@@ -51,9 +53,22 @@ export default function Name() {
 
   //   every new render/rerender(when click 'back') reset next button
   useEffect(() => {
-    setNewFormCtxState({ ...newFormCtxState, next: false });
+    setNewFormCtxState({ ...newFormCtxState, next: edit ? true : fasle });
   }, []);
 
+  useEffect(() => {
+    if (edit && router.components["/[id]"]) {
+      setName(router.components["/[id]"].props.pageProps.words[0].db.name);
+    } else {
+      router.replace("/");
+    }
+  }, []);
+
+  // set context here
+  /**
+   * TODO udpate formcontext in a useEffect function to update it with the /edit "name" value.
+   * this is last step to acomplish the task in the todo page
+   */
   return (
     <Box as="form">
       <div>
@@ -61,6 +76,7 @@ export default function Name() {
           Name:
         </Label>
         <Input
+          disabled={edit ? true : false}
           className="mt-4"
           name="name"
           placeholder="name"

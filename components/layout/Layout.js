@@ -50,7 +50,7 @@ export default function Layout({
   const handleChange = (inputValue, { action }) => {
     // on user selection
     // use next router here to navigate to selected word page
-    inputValue !== null && router.replace(`/${inputValue.label}`);
+    inputValue !== null && router.replace(`/${inputValue.value}`);
   };
   const handleInputChange = (inputValue, actionMeta) => {
     //  on user typing

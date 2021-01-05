@@ -31,10 +31,10 @@ function getSteps() {
   ];
 }
 
-function getStepContent(step) {
+function getStepContent(step, operation_type) {
   switch (step) {
     case 0:
-      return <Name />;
+      return <Name edit={operation_type.edit} />;
     case 1:
       return <Description />;
     case 2:
@@ -98,7 +98,7 @@ export default function CustomStepper({ newWord = false, edit = false }) {
     if (activeStep === steps.length) {
       // loading spinner while preparing for request
       setReqSpinner(true);
-
+      console.log(newFormState.formData);
       //either add new word or edit one
       let url = "/api/";
       if (newWord) {
@@ -190,7 +190,7 @@ export default function CustomStepper({ newWord = false, edit = false }) {
           <Step key={label}>
             <StepLabel>{label}</StepLabel>
             <StepContent>
-              <div>{getStepContent(index)}</div>
+              <div>{getStepContent(index, { edit })}</div>
               <div>
                 <div>
                   {activeStep > 0 && (

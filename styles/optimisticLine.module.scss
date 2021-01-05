@@ -18,11 +18,11 @@
 .realWrapper {
   display: flex;
   justify-content: center;
+  align-items: center;
   & div:first-child {
-    margin-right: 2rem;
+    margin-right: 1rem;
     font-weight: bold;
     font-size: 18px;
-    transform: rotate(-20deg);
   }
 }
 
