@@ -51,11 +51,9 @@ const formatDataForUI = (obj) => {
           }),
         ],
         videosLinks: [
-          [
-            ...entry.videos.map((obj) => {
-              return { dest: obj.link, title: obj.title };
-            }),
-          ],
+          ...entry.videos.map((obj) => {
+            return { dest: obj.link, title: obj.title };
+          }),
         ],
         booksLinks: [
           ...entry.books.map((obj) => {
@@ -66,7 +64,7 @@ const formatDataForUI = (obj) => {
       },
     };
   });
-  // add edit button layout meta data
+  // add "edit" button layout meta data
   formated.map((entry) => {
     entry.db.social.push({ name: "edit", icon: "edit", color: "secondary" });
     return entry;

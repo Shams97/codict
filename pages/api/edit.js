@@ -50,7 +50,7 @@ export default async (req, res) => {
       } else {
         // rest of errors
         res.status(400);
-        res.send({ error: e.message });
+        res.send({ isOk: false, message: e.message });
       }
     }
   }

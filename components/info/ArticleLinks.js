@@ -26,6 +26,7 @@ export default function Lists({
 
   if (videos) {
     CTX = words[counter].db.videosLinks;
+    console.log(CTX);
     header = "Videos";
   } else if (links) {
     CTX = words[counter].db.articlesLinks;
@@ -40,6 +41,7 @@ export default function Lists({
 
     links: {
       transition: "height 1s linear",
+      listStyle: "none",
       position: "relative",
       height: CTX.length > 5 && more === false ? "120px" : "auto",
       overflow: "hidden",
@@ -109,6 +111,7 @@ export default function Lists({
             </li>
           );
         })}
+        {/* show more button */}
         {CTX.length > 3 && (
           <li sx={_SX.arrowDown} onClick={handleMore}>
             <FontAwesomeIcon
@@ -120,6 +123,7 @@ export default function Lists({
             />
           </li>
         )}
+        {/* show less button */}
         {more && (
           <li sx={_SX.arrowUp} onClick={handleLess}>
             <FontAwesomeIcon

@@ -21,7 +21,7 @@ import organizeFormData from "../../lib/pages/organizedFormData";
 
 function getSteps() {
   return [
-    "Name and Sound ",
+    "Name",
     "Description",
     "where is it used?",
     "Point to usefull links (tutorials/articles)",
@@ -59,6 +59,7 @@ export default function CustomStepper({ newWord = false, edit = false }) {
   const { theme } = context;
   const [newFormState, _] = useContext(newFormCTX);
   const [reqSpinner, setReqSpinner] = useState(false);
+  const [requesting, setRequesting] = useState(false);
   const [message, setMessage] = useState({
     msg: "",
     isOk: false,
@@ -67,10 +68,8 @@ export default function CustomStepper({ newWord = false, edit = false }) {
 
   const _SX = {
     back: {
-      color: theme.colors.text,
-      border: "1px solid",
-      borderColor: theme.colors.text,
-      backgroundColor: theme.colors.background,
+      backgroundColor: `${theme.colors.text}!important`,
+      color: `${theme.colors.background}!important`,
       ":hover": {
         color: theme.colors.background,
       },
@@ -79,10 +78,8 @@ export default function CustomStepper({ newWord = false, edit = false }) {
       display: "inline-flex",
       justifyContent: "center",
       alignItems: "center",
-      color: theme.colors.text,
-      border: "1px solid",
-      borderColor: theme.colors.text,
-      backgroundColor: theme.colors.background,
+      backgroundColor: `${theme.colors.text}!important`,
+      color: `${theme.colors.background}!important`,
       ":hover": {
         color: theme.colors.background,
       },
@@ -98,7 +95,7 @@ export default function CustomStepper({ newWord = false, edit = false }) {
     if (activeStep === steps.length) {
       // loading spinner while preparing for request
       setReqSpinner(true);
-      console.log(newFormState.formData);
+      setRequesting(true);
       //either add new word or edit one
       let url = "/api/";
       if (newWord) {
@@ -143,10 +140,10 @@ export default function CustomStepper({ newWord = false, edit = false }) {
           }, 3000);
         })
         .catch((error) => {
+          setRequesting(false);
           if (error.response) {
             // on failure display error message and keep user at the same page either to fix errors or to try again
             setReqSpinner(false);
-            // use custom error messages instead of default ones
             setMessage({
               msg: error.response.data.message,
               isOk: error.response.data.isOk,
@@ -188,7 +185,9 @@ export default function CustomStepper({ newWord = false, edit = false }) {
       <Stepper activeStep={activeStep} orientation="vertical">
         {steps.map((label, index) => (
           <Step key={label}>
-            <StepLabel>{label}</StepLabel>
+            <StepLabel>
+              <h6>{label}</h6>
+            </StepLabel>
             <StepContent>
               <div>{getStepContent(index, { edit })}</div>
               <div>
@@ -227,6 +226,7 @@ export default function CustomStepper({ newWord = false, edit = false }) {
             sx={_SX.back}
             variant="contained"
             onClick={handleReset}
+            disabled={requesting}
           >
             Reset
           </Button>
@@ -234,7 +234,7 @@ export default function CustomStepper({ newWord = false, edit = false }) {
             className="mt-4 mx-2"
             sx={_SX.back}
             variant="contained"
-            disabled={activeStep === 0}
+            disabled={activeStep === 0 || requesting}
             onClick={handleBack}
           >
             Back
@@ -242,9 +242,9 @@ export default function CustomStepper({ newWord = false, edit = false }) {
           <Button
             className="mt-4"
             css={_SX.next}
-            disabled={!newFormState.next}
-            variant="contained"
+            disabled={!newFormState.next || requesting}
             onClick={handleNext}
+            variant="contained"
           >
             {reqSpinner && <Spinner title="request" size={10} />}
             Send

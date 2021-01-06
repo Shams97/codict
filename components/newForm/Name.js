@@ -1,7 +1,7 @@
 /**@jsxRuntime classic */
 /**@jsx jsx */
 
-import { jsx, Box, Label, Input, Alert } from "theme-ui";
+import { jsx, Box, Input, Alert } from "theme-ui";
 import { useContext, useEffect, useState } from "react";
 import { newFormCTX } from "../../ctx/forms/new/newFormCTX";
 import { nameSchema } from "../newForm/schema/schema";
@@ -51,30 +51,39 @@ export default function Name({ edit }) {
     });
   };
 
-  //   every new render/rerender(when click 'back') reset next button
+  //every new render/rerender(when click 'back') reset next button
+  // on /edit next button is not disabled
   useEffect(() => {
-    setNewFormCtxState({ ...newFormCtxState, next: edit ? true : fasle });
+    setNewFormCtxState({ ...newFormCtxState, next: edit ? true : false });
   }, []);
 
+  // when coming from a word page to edit page the name input field is filled with
+  // word name by default. word is taken from nextjs router object
   useEffect(() => {
     if (edit && router.components["/[id]"]) {
       setName(router.components["/[id]"].props.pageProps.words[0].db.name);
     } else {
+      // if /edit page is refreshed, redirect to index page. (one reason is word can't be taken anymore from nextjs router object)
       router.replace("/");
     }
   }, []);
 
-  // set context here
-  /**
-   * TODO udpate formcontext in a useEffect function to update it with the /edit "name" value.
-   * this is last step to acomplish the task in the todo page
-   */
+  // finally update form data context with word name to be edited before sending request to API
+  useEffect(() => {
+    if (edit && router.components["/[id]"]) {
+      setNewFormCtxState({
+        next: true,
+        formData: {
+          ...newFormCtxState.formData,
+          name: router.components["/[id]"].props.pageProps.words[0].db.name,
+        },
+      });
+    }
+  }, []);
+
   return (
     <Box as="form">
       <div>
-        <Label htmlFor="name" className="mt-2">
-          Name:
-        </Label>
         <Input
           disabled={edit ? true : false}
           className="mt-4"

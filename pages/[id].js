@@ -9,7 +9,6 @@ import { Col, Container, Row } from "reactstrap";
 import Description from "../components/info/Description";
 import InfoTable from "../components/info/Table";
 import Lists from "../components/info/ArticleLinks";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Synonyms from "../components/info/Synonyms";
 const _SX = {
   header: {
@@ -27,6 +26,7 @@ export default function WordPage({ words, options }) {
   // destruct seo data from word info
 
   const { title, description, keywords } = words[0].seo;
+
   useLabels(options, spreadWords);
 
   return (
@@ -73,26 +73,26 @@ export default function WordPage({ words, options }) {
             <InfoTable words={words} counter={counter} />
           </Col>
         </Row>
+
+        <Row className="my-4 col-8 mx-auto">
+          <Synonyms words={words} counter={counter} />
+        </Row>
         <Row>
-          <Col className="mx-auto mt-4 col-12">
-            <div sx={_SX.header}>
-              <FontAwesomeIcon icon="swimming-pool" width={50} height={50} />
-              <h2 className="ml-3">Dive Deeper:</h2>
-            </div>
+          <Col className="mx-auto mt-4 col-8">
             <Row>
               <Col>
-                <Lists words={words} counter={counter} links />
-              </Col>
-              <Col>
-                <Lists words={words} counter={counter} videos />
-              </Col>
-              <Col>
-                <Lists words={words} counter={counter} books />
-              </Col>
-            </Row>
+                {words[counter].db.articlesLinks.length > 0 && (
+                  <Lists words={words} counter={counter} links />
+                )}
 
-            <Row className="my-4">
-              <Synonyms words={words} counter={counter} />
+                {words[counter].db.videosLinks.length > 0 && (
+                  <Lists words={words} counter={counter} videos />
+                )}
+
+                {words[counter].db.booksLinks.length > 0 && (
+                  <Lists words={words} counter={counter} books />
+                )}
+              </Col>
             </Row>
           </Col>
         </Row>

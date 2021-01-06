@@ -56,9 +56,6 @@ export default function Description({}) {
   return (
     <Box as="form">
       <div>
-        <Label htmlFor="name" className="mt-2">
-          Name:
-        </Label>
         <Textarea
           className="mt-4"
           name="description"

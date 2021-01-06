@@ -12,11 +12,12 @@
  * 5- useState in React hooks does not merge objects. this.setState does in class components
  *    hence, object mergin is used to keep old data and only update needed one.
  */
-import { jsx, Label, Input, Button } from "theme-ui";
+import { jsx, Label, Input } from "theme-ui";
 import { Row, Col } from "reactstrap";
 import { useEffect, useState, useContext } from "react";
 import { newFormCTX } from "../../../ctx/forms/new/newFormCTX";
 import { linkSchema, titleSchema } from "../schema/schema";
+import { Button } from "@material-ui/core";
 
 export default function UsefullTemplate({ type }) {
   //state controls how many links to be rendered. (when deleting or adding)
@@ -198,20 +199,22 @@ export default function UsefullTemplate({ type }) {
 
   return (
     <div>
-      {more.map((n) => (
+      {more.map((n, i) => (
         <Row key={n} className="mt-3 py-3">
           <Col xs="12" className="text-right">
             <Button
+              disabled={i === 0 ? true : false}
+              variant="contained"
               onClick={(e) => {
                 handleRemove(e, n);
               }}
             >
-              -
+              Del
             </Button>
           </Col>
 
           <Col xs="12">
-            <Label htmlFor={`title-${n}`}>Add Title:</Label>
+            <Label htmlFor={`title-${n}`}>Title:</Label>
             <Input
               id={`title-${n}`}
               name={n}
@@ -229,7 +232,7 @@ export default function UsefullTemplate({ type }) {
 
           <Col xs="12">
             <Label htmlFor={`link-${n}`} className="mt-2">
-              Add Link URL:
+              URL:
             </Label>
             <Input
               onChange={(e) => {
@@ -247,7 +250,7 @@ export default function UsefullTemplate({ type }) {
           </Col>
         </Row>
       ))}
-      <Button className="mt-4" onClick={handleAdd}>
+      <Button variant="contained" className="mt-4" onClick={handleAdd}>
         Add
       </Button>
     </div>

@@ -53,7 +53,7 @@ const CustomCard = () => {
             {contributersCount === null ? (
               <OptimisticLine />
             ) : (
-              <RealData number={contributersCount} word="Contributors" />
+              <RealData number={contributersCount} word="Contributions" />
             )}
           </li>
         </ul>
