@@ -76,14 +76,19 @@ export default async function (req, res) {
     const {
       query: { id },
     } = req;
-    await connecAtlas({ user: true });
+    try {
+      await connecAtlas({ user: true });
 
-    const doc = await WordList.findOne({ word: id })
-      .select("list")
-      .lean()
-      .exec();
-    const formated = formatDataForUI(doc);
-    res.status(200);
-    res.send({ formated });
+      const doc = await WordList.findOne({ word: id })
+        .select("list")
+        .lean()
+        .exec();
+      const formated = formatDataForUI(doc);
+      res.status(200);
+      res.send({ formated });
+    } catch (e) {
+      res.status(200);
+      res.send({ formated: null });
+    }
   }
 }

@@ -34,7 +34,7 @@ export default function Description({ words, availableWords }) {
   const word = words[0].db.name;
   return (
     <Row>
-      <Col>
+      <Col className="mx-auto" xs="12" md="10" lg="8">
         <Card className="mt-4" sx={_SX.card}>
           <CardBody>
             <Quote words={words} counter={counter}>

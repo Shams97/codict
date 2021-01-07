@@ -12,34 +12,23 @@ export default function About() {
       description="Code dictionary or, codict, is a place where Computer Science and Computer Engineering technical terms and terminology live. If while you learn something, and come across some term/word that makes no sense to you, use codict search box to find out about."
       includeSearchInput={false}
     >
-      {/* temporary page TODO list */}
-      <div
-        sx={{
-          position: "fixed",
-          bottom: "0",
-          right: "0",
-          border: "1px solid",
-        }}
-      >
-        <ul>
-          <li>page is not protected</li>
-        </ul>
-      </div>
       <Text as="h1">Why?</Text>
-      <Text as="p">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque nisl
-        eros, pulvinar facilisis justo mollis, auctor consequat urna. Morbi a
-        bibendum metus. Donec scelerisque sollicitudin enim eu venenatis. Duis
-        tincidunt laoreet ex, in pretium orci vestibulum eget. Class aptent
-        taciti sociosqu ad litora torquent per conubia nostra, per inceptos
-        himenaeos. Duis pharetra luctus lacus ut vestibulum. Maecenas ipsum
-        lacus, lacinia quis posuere ut, pulvinar vitae dolor. Integer eu nibh at
-        nisi ullamcorper sagittis id vel leo. Integer feugiat faucibus libero,
-        at maximus nisl suscipit posuere. Morbi nec enim nunc. Phasellus
-        bibendum turpis ut ipsum egestas, sed sollicitudin elit convallis. Cras
-        pharetra mi tristique sapien vestibulum lobortis. Nam eget bibendum
-        metus, non dictum mauris. Nulla at tellus sagittis, viverra est a,
-        bibendum metus.
+      <Text as="p" className="mt-4">
+        Welcome to codict <sup>&reg;</sup> world. Have you ever been reading or
+        learning something new, like a new technology, or simply, just the new
+        Javascript framework everybody is talking about? We all do!!. this is
+        how we live as computer programmers of all kinds. What really used to be
+        annoying to me, as i was learning is, an article author for example,
+        mentions something that looks compeletly new to me. Something that makes
+        me feel i know nothing!!. Reality is, as you are learning and come
+        across such things, you don't need to pause the entire universe and go
+        learn that little annoying thing, as this could be recursively infinite
+        and when you may face another unknown term as you go. Hence, from my
+        experience, all you rally need to do, is to get a rough idea about that
+        myestirous thing and continue your learning journey. Codict{" "}
+        <sup>&reg;</sup> comes to rescue. With the help of the community, you
+        will find curated definitions and brief introductions to to whatever
+        term you might face as you learn.
       </Text>
       <Row
         className="text-center"

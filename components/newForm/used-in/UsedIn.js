@@ -73,6 +73,7 @@ export default function UsedIn({}) {
 
   return (
     <Container>
+      {/* loop all four options (languages, frameWorks,...) */}
       {options.map((opt, i) => {
         return (
           <SelectionList

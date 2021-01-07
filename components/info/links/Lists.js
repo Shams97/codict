@@ -26,7 +26,6 @@ export default function Lists({
 
   if (videos) {
     CTX = words[counter].db.videosLinks;
-    console.log(CTX);
     header = "Videos";
   } else if (links) {
     CTX = words[counter].db.articlesLinks;

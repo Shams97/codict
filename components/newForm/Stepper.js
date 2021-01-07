@@ -34,7 +34,9 @@ function getSteps() {
 function getStepContent(step, operation_type) {
   switch (step) {
     case 0:
-      return <Name edit={operation_type.edit} />;
+      return (
+        <Name edit={operation_type.edit} newWord={operation_type.newWord} />
+      );
     case 1:
       return <Description />;
     case 2:
@@ -52,7 +54,7 @@ function getStepContent(step, operation_type) {
   }
 }
 
-export default function CustomStepper({ newWord = false, edit = false }) {
+export default function CustomStepper({ newWord, edit }) {
   const [activeStep, setActiveStep] = useState(0);
   const steps = getSteps();
   const context = useThemeUI();
@@ -189,7 +191,7 @@ export default function CustomStepper({ newWord = false, edit = false }) {
               <h6>{label}</h6>
             </StepLabel>
             <StepContent>
-              <div>{getStepContent(index, { edit })}</div>
+              <div>{getStepContent(index, { edit, newWord })}</div>
               <div>
                 <div>
                   {activeStep > 0 && (

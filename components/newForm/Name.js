@@ -15,7 +15,7 @@ const _SX = {
   },
 };
 
-export default function Name({ edit }) {
+export default function Name({ edit, newWord }) {
   const router = useRouter();
   const [newFormCtxState, setNewFormCtxState] = useContext(newFormCTX);
   const [name, setName] = useState("");
@@ -60,24 +60,28 @@ export default function Name({ edit }) {
   // when coming from a word page to edit page the name input field is filled with
   // word name by default. word is taken from nextjs router object
   useEffect(() => {
-    if (edit && router.components["/[id]"]) {
-      setName(router.components["/[id]"].props.pageProps.words[0].db.name);
-    } else {
-      // if /edit page is refreshed, redirect to index page. (one reason is word can't be taken anymore from nextjs router object)
-      router.replace("/");
+    if (!newWord) {
+      if (edit && router.components["/[id]"]) {
+        setName(router.components["/[id]"].props.pageProps.words[0].db.name);
+      } else {
+        // if /edit page is refreshed, redirect to index page. (one reason is word can't be taken anymore from nextjs router object)
+        router.replace("/");
+      }
     }
   }, []);
 
   // finally update form data context with word name to be edited before sending request to API
   useEffect(() => {
-    if (edit && router.components["/[id]"]) {
-      setNewFormCtxState({
-        next: true,
-        formData: {
-          ...newFormCtxState.formData,
-          name: router.components["/[id]"].props.pageProps.words[0].db.name,
-        },
-      });
+    if (!newWord) {
+      if (edit && router.components["/[id]"]) {
+        setNewFormCtxState({
+          next: true,
+          formData: {
+            ...newFormCtxState.formData,
+            name: router.components["/[id]"].props.pageProps.words[0].db.name,
+          },
+        });
+      }
     }
   }, []);
 

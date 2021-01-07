@@ -1,7 +1,7 @@
 /**@jsxRuntime classic */
 /**@jsx jsx */
 import { jsx } from "theme-ui";
-import styles from "../../styles/optimisticLine.module.scss";
+import styles from "../../styles/optimistic.module.scss";
 import { useEffect, useState } from "react";
 
 const RealData = ({ number, word }) => {

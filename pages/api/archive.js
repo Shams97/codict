@@ -17,7 +17,7 @@ function reduceSynonyms(options) {
   return reduced;
 }
 
-export default async function (req, res) {
+export default async function archive(req, res) {
   if (req.method === "GET") {
     try {
       await connectAtlas({ user: true });
@@ -57,7 +57,7 @@ export default async function (req, res) {
 
       await mongoose.connection.close();
       res.statusCode = 200;
-      res.json({ data: groupedOptions });
+      res.json({ groupedOptions });
     } catch (e) {
       await mongoose.connection.close();
       res.statusCode = 400;

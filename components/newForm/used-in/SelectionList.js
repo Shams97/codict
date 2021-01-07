@@ -13,7 +13,6 @@ const _SX = {
   root: {
     display: "flex",
     justifyContent: "center",
-    alignItems: "center",
     position: "relative",
     flexWrap: "wrap",
     ":hover svg": {
@@ -86,7 +85,8 @@ const Icons = ({ iconList, label }) => {
             sx={{
               ..._SX.isIcon,
               // if selcted update UI for this icon
-              borderBottom: select[i.name[1]] && "1px solid red",
+              borderBottom: "1px solid transparent",
+              borderColor: select[i.name[1]] && "green",
             }}
             key={idx}
             onClick={(e) => {
@@ -97,11 +97,12 @@ const Icons = ({ iconList, label }) => {
             style={{ height: i.height, width: i.width }}
           />
         ) : (
-          <div
+          <li
             className="mx-4 mt-2"
             sx={{
               ..._SX.notIcon,
-              borderBottom: select[i.name[0]] && "1px solid red",
+              borderBottom: "1px solid transparent",
+              borderColor: select[i.name[0]] && "green",
             }}
             title={i.name[0]}
             key={idx}
@@ -110,7 +111,7 @@ const Icons = ({ iconList, label }) => {
             }}
           >
             {i.name[0]}
-          </div>
+          </li>
         );
       })}
       <None setOptionUIstate={setSelect} optionUIstate={select} label={label} />

@@ -6,13 +6,14 @@ import { useRouter } from "next/router";
 import AppNav from "../navbar/Navbar";
 import { Container, Row, Col } from "reactstrap";
 import CreatableSelect from "react-select";
-import { useContext } from "react";
-import { wordsCtx } from "../../ctx/words/wordsCtx";
 import Menu from "./Menu";
 import Option from "./Option";
 import NoOptionsMessage from "./NoOptionMessage";
 import ThemeUICTX from "../../ctx/themes/ThemeUI-Ctx";
 import MaterialUICTX from "../../ctx/themes/MateriaUI-Ctx";
+import useLabels from "../../lib/pages/useLabels";
+import InitialError from "./InitialError";
+import Input from "../optimistic/Input";
 
 const defaultKeywords = [
   "computer",
@@ -45,13 +46,17 @@ export default function Layout({
   includeSearchInput = true,
 }) {
   const router = useRouter();
-  const [words, _] = useContext(wordsCtx);
+
+  if (includeSearchInput) {
+    var { data, error } = useLabels();
+  }
 
   const handleChange = (inputValue, { action }) => {
     // on user selection
     // use next router here to navigate to selected word page
-    inputValue !== null && router.replace(`/${inputValue.value}`);
+    inputValue !== null && router.push(`/${inputValue.value}`);
   };
+
   const handleInputChange = (inputValue, actionMeta) => {
     //  on user typing
   };
@@ -82,8 +87,12 @@ export default function Layout({
             <AppNav />
           </header>
           <main>
+            {/*if some reason failed fetching words from my API display Error component*/}
+            {error && (
+              <InitialError message="Something Went Wrong...Refresh The Page." />
+            )}
             <Container>
-              {/* app page without react-select input */}
+              {/*render app page without react-select input */}
               {!includeSearchInput ? (
                 <Row>
                   <Col md="12 mt-4">{children}</Col>
@@ -92,19 +101,24 @@ export default function Layout({
                 <Row>
                   {/* app page with react-select */}
                   <Col xs="12" md="8" className="mx-auto my-4">
-                    <CreatableSelect
-                      id="1"
-                      instanceId="1"
-                      inputId="1"
-                      name="words"
-                      isClearable
-                      isSearchable
-                      components={{ Option, Menu, NoOptionsMessage }}
-                      onChange={handleChange}
-                      onInputChange={handleInputChange}
-                      options={words}
-                      placeholder="Search"
-                    />
+                    {/* render react-selct input only if words are fetched */}
+                    {data ? (
+                      <CreatableSelect
+                        id="1"
+                        instanceId="1"
+                        inputId="1"
+                        name="words"
+                        isClearable
+                        isSearchable
+                        components={{ Option, Menu, NoOptionsMessage }}
+                        onChange={handleChange}
+                        onInputChange={handleInputChange}
+                        options={data.groupedOptions}
+                        placeholder="Search"
+                      />
+                    ) : (
+                      <Input />
+                    )}
                   </Col>
                   <Col md="12 mt-4">{children}</Col>
                 </Row>

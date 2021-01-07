@@ -25,6 +25,7 @@
     "react-select": "^3.1.1",
     "reactstrap": "^8.7.1",
     "sass": "^1.30.0",
+    "swr": "^0.3.11",
     "theme-ui": "^0.3.4"
   },
   "devDependencies": {}

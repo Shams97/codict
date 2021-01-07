@@ -2,7 +2,7 @@
 /**@jsx jsx */
 import { jsx } from "theme-ui";
 import { createRef, useEffect } from "react";
-import { Table } from "reactstrap";
+import { Table, Col, Row } from "reactstrap";
 import { useColorMode } from "theme-ui";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import tableStyles from "../../styles/table.module.scss";
@@ -47,29 +47,40 @@ export default function InfoTable({ words, counter }) {
     }
   }, [colorMode]);
   return (
-    <Table innerRef={ref} sx={_Sx.root} borderless responsive>
-      <tbody>
-        {words[counter].db.used.map((row, i1) => {
-          return (
-            <tr key={i1}>
-              {<th sx={_Sx.th}>{row.name}:</th>}
-              {row.in.map((list, i2) => {
-                return list.name ? (
-                  <td key={i1 + i2}>
-                    <FontAwesomeIcon
-                      icon={[list.prefix, list.name]}
-                      width={20}
-                      height={20}
-                    />
-                  </td>
-                ) : (
-                  <td key={i1 + i2}>{list}</td>
-                );
-              })}
-            </tr>
-          );
-        })}
-      </tbody>
-    </Table>
+    <Row>
+      <Col
+        md="8"
+        className="mx-auto"
+        lg="6"
+        sx={{
+          marginTop: "4rem",
+        }}
+      >
+        <Table innerRef={ref} sx={_Sx.root} borderless responsive>
+          <tbody>
+            {words[counter].db.used.map((row, i1) => {
+              return (
+                <tr key={i1}>
+                  {<th sx={_Sx.th}>{row.name}:</th>}
+                  {row.in.map((list, i2) => {
+                    return list.name ? (
+                      <td key={i1 + i2}>
+                        <FontAwesomeIcon
+                          icon={[list.prefix, list.name]}
+                          width={20}
+                          height={20}
+                        />
+                      </td>
+                    ) : (
+                      <td key={i1 + i2}>{list}</td>
+                    );
+                  })}
+                </tr>
+              );
+            })}
+          </tbody>
+        </Table>
+      </Col>
+    </Row>
   );
 }

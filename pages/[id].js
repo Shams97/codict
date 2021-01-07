@@ -1,15 +1,19 @@
 /**@jsxRuntime classic */
 /**@jsx jsx */
 import { jsx } from "theme-ui";
-import { useContext, useState } from "react";
+import { Fragment, useState } from "react";
 import Layout from "../components/layout/Layout";
-import { wordsCtx } from "../ctx/words/wordsCtx";
-import useLabels from "../lib/pages/useLabels";
-import { Col, Container, Row } from "reactstrap";
+import { Container } from "reactstrap";
 import Description from "../components/info/Description";
 import InfoTable from "../components/info/Table";
-import Lists from "../components/info/ArticleLinks";
 import Synonyms from "../components/info/Synonyms";
+import InitialError from "../components/layout/InitialError";
+import LinksGroup from "../components/info/links/LinksGroup";
+import { useRouter } from "next/router";
+import useSWR from "swr";
+import OptimisticDescription from "../components/optimistic/Description";
+import OptimisticTable from "../components/optimistic/Table";
+
 const _SX = {
   header: {
     display: "flex",
@@ -19,38 +23,47 @@ const _SX = {
   },
 };
 
-export default function WordPage({ words, options }) {
-  const [_, spreadWords] = useContext(wordsCtx);
-  // counter should always star at 1, this where rendered words data start off
+export default function WordPage() {
+  const [initialError, setInitialError] = useState({
+    isError: false,
+    message: "",
+  });
   const [counter, setCounter] = useState(0);
-  // destruct seo data from word info
+  const router = useRouter();
 
-  const { title, description, keywords } = words[0].seo;
+  const fetcher = (url) => fetch(url).then((res) => res.json());
+  const { data, error } = useSWR(
+    router.query.id ? `/api/${router.query.id}` : null,
+    fetcher
+  );
+  if (error) {
+    setInitialError({
+      isError: true,
+      message: "Something Went Wrong...Refresh the page.",
+    });
+  } else {
+    let title, description, keywords, words;
+    if (data) {
+      ({ title, description, keywords } = data.formated[0].seo);
 
-  useLabels(options, spreadWords);
+      words = data.formated.sort((a, b) => {
+        return b.db.social[0].count - a.db.social[0].count;
+      });
+    }
 
-  return (
-    <Layout title={title} description={description} keywords={keywords}>
-      <Container>
-        <Row>
-          {/* temporary page TODO list */}
-          <div
-            sx={{
-              position: "fixed",
-              bottom: "0",
-              right: "0",
-              border: "1px solid",
-            }}
-          >
-            <ul>
-              <li>page is not protected</li>
-              <li>
-                page is pre-built using <code>getStaticPaths</code> then{" "}
-                <code>getStaticProps</code>
-              </li>
-            </ul>
-          </div>
-          <Col className="mx-auto" xs="12" md="7" lg="8">
+    return (
+      <Layout
+        title={data ? "codict" : title}
+        description={data ? "codict" : description}
+        keywords={data ? "codict" : keywords}
+      >
+        <Container>
+          {/* if error fetching word data display initial error component */}
+          {initialError.isError && <InitialError message={initialError} />}
+
+          {!data ? (
+            <OptimisticDescription />
+          ) : (
             <Description
               words={words}
               availableWords={{
@@ -59,82 +72,18 @@ export default function WordPage({ words, options }) {
                 wordsCount: words.length - 1,
               }}
             />
-          </Col>
-        </Row>
-        <Row>
-          <Col
-            md="8"
-            className="mx-auto"
-            lg="6"
-            sx={{
-              marginTop: "4rem",
-            }}
-          >
-            <InfoTable words={words} counter={counter} />
-          </Col>
-        </Row>
-
-        <Row className="my-4 col-8 mx-auto">
-          <Synonyms words={words} counter={counter} />
-        </Row>
-        <Row>
-          <Col className="mx-auto mt-4 col-8">
-            <Row>
-              <Col>
-                {words[counter].db.articlesLinks.length > 0 && (
-                  <Lists words={words} counter={counter} links />
-                )}
-
-                {words[counter].db.videosLinks.length > 0 && (
-                  <Lists words={words} counter={counter} videos />
-                )}
-
-                {words[counter].db.booksLinks.length > 0 && (
-                  <Lists words={words} counter={counter} books />
-                )}
-              </Col>
-            </Row>
-          </Col>
-        </Row>
-      </Container>
-    </Layout>
-  );
-}
-
-export async function getStaticPaths() {
-  //fetch words from DB
-  const res = await fetch("http://localhost:3000/api/archive");
-  const json = await res.json();
-  const paths = json.data.map((entry) => {
-    return {
-      params: { id: entry.label },
-    };
-  });
-
-  return {
-    paths,
-    fallback: false,
-  };
-}
-
-export async function getStaticProps({ params }) {
-  //fetch words from DB
-  const listRes = await fetch("http://localhost:3000/api/archive");
-  const ListJson = await listRes.json();
-
-  // fetch pages based on words available at DB
-  const wordsRes = await fetch(`http://localhost:3000/api/${params.id}`);
-  const wordsJson = await wordsRes.json();
-
-  // sort list of words definitions based on community number of likes before building pages
-  const words = wordsJson.formated.sort((a, b) => {
-    return b.db.social[0].count - a.db.social[0].count;
-  });
-  return {
-    props: {
-      words,
-      options: ListJson.data,
-    },
-    revalidate: 1,
-  };
+          )}
+          {data ? (
+            <Fragment>
+              <InfoTable words={words} counter={counter} />
+              <Synonyms words={words} counter={counter} />
+              <LinksGroup words={words} counter={counter} />
+            </Fragment>
+          ) : (
+            <OptimisticTable />
+          )}
+        </Container>
+      </Layout>
+    );
+  }
 }

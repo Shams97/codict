@@ -1,0 +1,117 @@
+.linebg {
+  background: linear-gradient(-45deg, hsl(210, 4%, 70%), hsl(260, 20%, 40%));
+  background-size: 400% 400%;
+  animation: gradient 2s ease infinite;
+  padding: 0.4rem;
+  width: 25%;
+  border-radius: 5px;
+}
+
+.circleBg {
+  background: linear-gradient(-45deg, hsl(210, 4%, 70%), hsl(260, 20%, 40%));
+  background-size: 400% 400%;
+  animation: gradient 1s ease infinite;
+  padding: 0.4rem;
+  border-radius: 20px;
+  margin-right: 10px;
+}
+.realWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  & div:first-child {
+    margin-right: 1rem;
+    font-weight: bold;
+    font-size: 18px;
+  }
+}
+
+// react-select input comp
+.input {
+  display: flex;
+  justify-content: flex-end;
+  background: linear-gradient(-45deg, hsl(210, 4%, 70%), hsl(260, 20%, 40%));
+  background-size: 400% 400%;
+  animation: gradient 2s ease infinite;
+  border-radius: 5px;
+  width: 100%;
+  height: 40px;
+  margin: auto;
+}
+
+.inputArrow {
+  background: linear-gradient(-45deg, hsl(210, 4%, 70%), hsl(260, 20%, 40%));
+  background-size: 400% 400%;
+  animation: gradient 2s ease 1s infinite;
+  padding: 0.4rem;
+  border-radius: 2px;
+  width: 10%;
+}
+.description {
+  width: 100%;
+  height: 200px;
+  background: linear-gradient(-45deg, hsl(210, 4%, 70%), hsl(260, 20%, 40%));
+  background-size: 400% 400%;
+  animation: gradient 4s ease 1s infinite;
+  padding: 0.4rem;
+  border-radius: 2px;
+  display: flex;
+  flex-direction: column-reverse;
+}
+.descFooter {
+  width: 100%;
+  padding: 0.4rem;
+  border-radius: 2px;
+  display: flex;
+  justify-content: flex-start;
+}
+.descIcons {
+  background: linear-gradient(-45deg, hsl(210, 4%, 70%), hsl(260, 20%, 40%));
+  background-size: 400% 400%;
+  animation: gradient 1s ease 1s infinite;
+  padding: 0.4rem;
+  border-radius: 2px;
+  width: 5%;
+  height: 25px;
+  margin-right: 10px;
+  margin-bottom: 5px;
+}
+.descMiddle {
+  background: linear-gradient(-45deg, hsl(210, 4%, 70%), hsl(260, 20%, 40%));
+  background-size: 400% 400%;
+  animation: gradient 2s ease 1s infinite;
+  padding: 0.4rem;
+  border-radius: 2px;
+  align-self: center;
+  height: 60%;
+  width: 50%;
+}
+
+.table {
+  padding: 0.4rem;
+  border-radius: 2px;
+}
+.tableData {
+  background: linear-gradient(-45deg, hsl(210, 4%, 70%), hsl(260, 20%, 40%));
+  background-size: 400% 400%;
+  animation: gradient 2s ease 1s infinite;
+  padding: 2rem;
+}
+.tableHead {
+  background: linear-gradient(-45deg, hsl(210, 4%, 70%), hsl(270, 2%, 23%));
+  background-size: 400% 400%;
+  animation: gradient 3s ease 1s infinite;
+  padding: 2rem;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}

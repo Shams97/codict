@@ -20,11 +20,6 @@ export default function DescNavItem({ social, word, order, wordsCount }) {
   const [likes, setLikes] = useState({});
   const [dislikes, setDisLikes] = useState({});
 
-  const handleEdit = (e) => {
-    e.preventDefault();
-    router.replace("/edit");
-  };
-
   const _SX = {
     socialItem: {
       backgroundColor: "background",
@@ -42,8 +37,14 @@ export default function DescNavItem({ social, word, order, wordsCount }) {
       fontWeight: "bold",
     },
   };
+  const handleEdit = (e) => {
+    e.preventDefault();
+    router.push("/edit");
+  };
+
   const handleSocialInteraction = (e, social) => {
     e.preventDefault();
+    // like
     if (social.name === "like") {
       setLikes((prev) => {
         if (prev[`definition-${order}`] === 0) {

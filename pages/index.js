@@ -1,15 +1,13 @@
 /**@jsxRuntime classic */
 /**@jsx jsx */
 
-import { useContext } from "react";
 import { jsx } from "theme-ui";
 import Layout from "../components/layout/Layout";
-import { wordsCtx } from "../ctx/words/wordsCtx";
-import useLabels from "../lib/pages/useLabels";
 import { Col, Container, Row } from "reactstrap";
 import CustomCard from "../components/landing/NumbersCard";
 import WhyCard from "../components/landing/WhyCard";
 import SuppotrCard from "../components/landing/SupportCard";
+
 const _SX = {
   root: {
     marginTop: "5rem",
@@ -23,11 +21,7 @@ const _SX = {
     alignItems: "flex-start",
   },
 };
-export default function Home({ options }) {
-  const [_, spreadWords] = useContext(wordsCtx);
-
-  useLabels(options, spreadWords);
-
+export default function Home() {
   return (
     <Layout
       title="codict"
@@ -36,26 +30,6 @@ export default function Home({ options }) {
     >
       {/* children of layout */}
       <Container sx={_SX.row}>
-        {/* temporary page TODO list */}
-        <div
-          sx={{
-            position: "fixed",
-            bottom: "0",
-            right: "0",
-            border: "1px solid",
-          }}
-        >
-          <ul>
-            <li>page is not protected</li>
-            <li>
-              cards are fetched from client side using <code>AJAX</code>
-            </li>
-            <li>
-              page words is rendered and supplied into <code>wordsCtx</code>{" "}
-              upon rendering using <code>getStaticProps</code>
-            </li>
-          </ul>
-        </div>
         <Row className="text-center" sx={_SX.row}>
           <Col sm="12 my-4" md="4">
             <CustomCard />
@@ -71,16 +45,4 @@ export default function Home({ options }) {
       {/* children of layout */}
     </Layout>
   );
-}
-
-export async function getStaticProps() {
-  //fetch words from DB
-  const res = await fetch("http://localhost:3000/api/archive");
-  const json = await res.json();
-  return {
-    props: {
-      options: json.data,
-    },
-    revalidate: 1,
-  };
 }

@@ -11,14 +11,14 @@ const Option = ({ children, ...props }) => {
     <components.Option
       {...props}
       sx={{
-        backgroundColor: "background",
-        color: "text",
+        color: "orange",
         borderRadius: "3px",
         ":hover": {
           backgroundColor: colorMode === "light" ? "muted" : "text",
           color: colorMode === "light" ? "text" : "background",
         },
-      }}>
+      }}
+    >
       {children}
     </components.Option>
   );
