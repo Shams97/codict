@@ -39,7 +39,8 @@ export default function DescNavItem({ social, word, order, wordsCount }) {
   };
   const handleEdit = (e) => {
     e.preventDefault();
-    router.push("/edit");
+    //navigate to /edit/[id] page (this page is protected)
+    router.push(`/edit/${router.query.id}`);
   };
 
   const handleSocialInteraction = (e, social) => {

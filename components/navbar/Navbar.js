@@ -3,13 +3,16 @@
 import { jsx, Text } from "theme-ui";
 import { useState } from "react";
 import Link from "next/link";
-import { Collapse, Navbar, NavbarToggler, Nav } from "reactstrap";
+import { Collapse, Navbar, NavbarToggler, Nav, NavItem } from "reactstrap";
 import ToggleColors from "./toggleColorMode";
-import CustomNavItem from "./CustomNavItem";
-
+import NavButton from "./NavButton";
+import { useAuth0 } from "@auth0/auth0-react";
+import User from "../navbar/User";
+import Logout from "../navbar/Logout";
+import Login from "../navbar/Login";
 const AppNav = () => {
   const [isOpen, setIsOpen] = useState(false);
-
+  const { isLoading, isAuthenticated, user } = useAuth0();
   const _SX = {
     navbar: {
       backgroundColor: "background",
@@ -82,11 +85,18 @@ const AppNav = () => {
             sx={{
               alignItems: "center",
               justifyContent: "center",
-            }}>
-            <CustomNavItem text="login" url="/login" />
-            <CustomNavItem text="logout" url="/logout" />
-            <CustomNavItem text="about" url="/about" />
-            <CustomNavItem comp={ToggleColors} />
+            }}
+          >
+            <NavButton
+              as="link"
+              linkDetails={{ url: "/about", text: "About" }}
+            />
+
+            <ToggleColors />
+
+            {!isLoading ? isAuthenticated ? <Logout /> : <Login /> : ""}
+
+            {isAuthenticated ? <User userInfo={user} /> : ""}
           </Nav>
         </Collapse>
       </Navbar>

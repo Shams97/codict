@@ -1,11 +1,11 @@
 /**@jsxRuntime classic */
 /**@jsx jsx */
+import { withAuthenticationRequired } from "@auth0/auth0-react";
 import { jsx } from "theme-ui";
 import Layout from "../components/layout/Layout";
 import CustomStepper from "../components/newForm/Stepper";
 import NewFormCtx from "../ctx/forms/new/newFormCTX";
-
-export default function New({}) {
+function New({}) {
   return (
     <Layout includeSearchInput={false}>
       <NewFormCtx>
@@ -14,3 +14,5 @@ export default function New({}) {
     </Layout>
   );
 }
+
+export default withAuthenticationRequired(New);

@@ -104,6 +104,13 @@
   padding: 2rem;
 }
 
+.button {
+  background: linear-gradient(-45deg, hsl(210, 4%, 70%), hsl(270, 2%, 23%));
+  background-size: 400% 400%;
+  animation: gradient 3s ease 1s infinite;
+  padding: 2rem;
+}
+
 @keyframes gradient {
   0% {
     background-position: 0% 50%;

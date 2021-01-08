@@ -18,6 +18,7 @@ import UsefullTemplate from "./usefull/UsefullTemplate";
 import Synonyms from "../newForm/Synonyms";
 import { useRouter } from "next/router";
 import organizeFormData from "../../lib/pages/organizedFormData";
+import { useAuth0 } from "@auth0/auth0-react";
 
 function getSteps() {
   return [
@@ -35,7 +36,11 @@ function getStepContent(step, operation_type) {
   switch (step) {
     case 0:
       return (
-        <Name edit={operation_type.edit} newWord={operation_type.newWord} />
+        <Name
+          edit={operation_type.edit}
+          newWord={operation_type.newWord}
+          word={operation_type.word}
+        />
       );
     case 1:
       return <Description />;
@@ -54,7 +59,7 @@ function getStepContent(step, operation_type) {
   }
 }
 
-export default function CustomStepper({ newWord, edit }) {
+export default function CustomStepper({ newWord, edit, word }) {
   const [activeStep, setActiveStep] = useState(0);
   const steps = getSteps();
   const context = useThemeUI();
@@ -67,6 +72,7 @@ export default function CustomStepper({ newWord, edit }) {
     isOk: false,
   });
   const router = useRouter();
+  const { user } = useAuth0();
 
   const _SX = {
     back: {
@@ -111,7 +117,7 @@ export default function CustomStepper({ newWord, edit }) {
         isOk: false,
       });
       //  sort form data collected from UI form
-      const sortedFormData = organizeFormData(newFormState.formData);
+      const sortedFormData = organizeFormData(newFormState.formData, user);
       /**
        * perform API request
        */
@@ -191,7 +197,7 @@ export default function CustomStepper({ newWord, edit }) {
               <h6>{label}</h6>
             </StepLabel>
             <StepContent>
-              <div>{getStepContent(index, { edit, newWord })}</div>
+              <div>{getStepContent(index, { edit, newWord, word })}</div>
               <div>
                 <div>
                   {activeStep > 0 && (

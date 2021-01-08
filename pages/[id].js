@@ -50,7 +50,9 @@ export default function WordPage() {
         return b.db.social[0].count - a.db.social[0].count;
       });
     }
-
+    /**
+     * TODO : fix why sometimes page does not load and ask for data (data.formated is undefined)
+     */
     return (
       <Layout
         title={data ? "codict" : title}

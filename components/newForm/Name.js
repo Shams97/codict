@@ -15,7 +15,7 @@ const _SX = {
   },
 };
 
-export default function Name({ edit, newWord }) {
+export default function Name({ edit, newWord, word }) {
   const router = useRouter();
   const [newFormCtxState, setNewFormCtxState] = useContext(newFormCTX);
   const [name, setName] = useState("");
@@ -61,8 +61,9 @@ export default function Name({ edit, newWord }) {
   // word name by default. word is taken from nextjs router object
   useEffect(() => {
     if (!newWord) {
-      if (edit && router.components["/[id]"]) {
-        setName(router.components["/[id]"].props.pageProps.words[0].db.name);
+      if (edit && word) {
+        console.log(word);
+        setName(word);
       } else {
         // if /edit page is refreshed, redirect to index page. (one reason is word can't be taken anymore from nextjs router object)
         router.replace("/");
@@ -73,12 +74,12 @@ export default function Name({ edit, newWord }) {
   // finally update form data context with word name to be edited before sending request to API
   useEffect(() => {
     if (!newWord) {
-      if (edit && router.components["/[id]"]) {
+      if (edit && word) {
         setNewFormCtxState({
           next: true,
           formData: {
             ...newFormCtxState.formData,
-            name: router.components["/[id]"].props.pageProps.words[0].db.name,
+            name: word,
           },
         });
       }

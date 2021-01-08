@@ -94,9 +94,37 @@ library.add(
   faCentos,
   faWindows
 );
+import { Auth0Provider } from "@auth0/auth0-react";
+import { useRouter } from "next/router";
 
-function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />;
+export default function MyApp({ Component, pageProps }) {
+  const router = useRouter();
+
+  // where to redirect user after login
+  const onRedirectCallback = (appState) => {
+    console.log(appState);
+    if (appState) {
+      router.push(appState);
+    }
+  };
+
+  // what to show while siging user in
+  const onRedirecting = () => {
+    return (
+      <div>
+        <h1>Signing you in....</h1>
+      </div>
+    );
+  };
+  return (
+    <Auth0Provider
+      domain={process.env.NEXT_PUBLIC_AUTH_DOMAIN}
+      clientId={process.env.NEXT_PUBLIC_AUTH_CLIENT_ID}
+      redirectUri={process.env.NEXT_PUBLIC_AUTH_REDIRECT_URI}
+      onRedirectCallback={onRedirectCallback}
+      onRedirecting={onRedirecting}
+    >
+      <Component {...pageProps} />
+    </Auth0Provider>
+  );
 }
-
-export default MyApp;
