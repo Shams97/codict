@@ -87,7 +87,7 @@ export default async function (req, res) {
       res.status(200);
       res.send({ formated });
     } catch (e) {
-      res.status(200);
+      res.status(400);
       res.send({ formated: null });
     }
   }

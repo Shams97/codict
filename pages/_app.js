@@ -47,6 +47,9 @@ import {
   faWindows,
 } from "@fortawesome/free-brands-svg-icons";
 import { library } from "@fortawesome/fontawesome-svg-core";
+import ThemeUICTX from "../ctx/themes/ThemeUI-Ctx";
+import MaterialUICTX from "../ctx/themes/MateriaUI-Ctx";
+import { Provider } from "next-auth/client";
 
 library.add(
   faCheck,
@@ -94,37 +97,15 @@ library.add(
   faCentos,
   faWindows
 );
-import { Auth0Provider } from "@auth0/auth0-react";
-import { useRouter } from "next/router";
 
 export default function MyApp({ Component, pageProps }) {
-  const router = useRouter();
-
-  // where to redirect user after login
-  const onRedirectCallback = (appState) => {
-    console.log(appState);
-    if (appState) {
-      router.push(appState);
-    }
-  };
-
-  // what to show while siging user in
-  const onRedirecting = () => {
-    return (
-      <div>
-        <h1>Signing you in....</h1>
-      </div>
-    );
-  };
   return (
-    <Auth0Provider
-      domain={process.env.NEXT_PUBLIC_AUTH_DOMAIN}
-      clientId={process.env.NEXT_PUBLIC_AUTH_CLIENT_ID}
-      redirectUri={process.env.NEXT_PUBLIC_AUTH_REDIRECT_URI}
-      onRedirectCallback={onRedirectCallback}
-      onRedirecting={onRedirecting}
-    >
-      <Component {...pageProps} />
-    </Auth0Provider>
+    <ThemeUICTX>
+      <MaterialUICTX>
+        <Provider session={pageProps.session}>
+          <Component {...pageProps} />
+        </Provider>
+      </MaterialUICTX>
+    </ThemeUICTX>
   );
 }

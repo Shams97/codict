@@ -4,12 +4,23 @@ import connectAtlas from "../../lib/api/db/connect";
 import WordList from "../../lib/api/db/schemas/newWord";
 import mongoose from "mongoose";
 import { ValidationError } from "joi";
-const customError = new Error();
-customError.name = "duplicate";
+import jwt from "next-auth/jwt";
 
 export default async (req, res) => {
   if (req.method === "POST") {
+    const duplicate_word = new Error();
+    duplicate_word.name = "Duplicate";
+
+    const not_signed_in = new Error();
+    not_signed_in.name = "AccessDenied";
+
+    const secret = process.env.SECRET;
     try {
+      const token = await jwt.getToken({ req, res });
+      if (!token) {
+        not_signed_in.message = "You need to Sing in First.";
+        throw not_signed_in;
+      }
       //connect to DB based on auth/role
       await connectAtlas({ user: true });
       // check for duplicates if any (same word/term added more than once)
@@ -19,8 +30,8 @@ export default async (req, res) => {
 
       if (duplicate !== null) {
         // duplicate and won't be added
-        customError.message = `'${req.body.data.name}' Already Exists. Please consider adding a new definition to the word by clicking the edit button on the word page`;
-        throw customError;
+        duplicate_word.message = `'${req.body.data.name}' Already Exists. Please consider adding a new definition to the word by clicking the edit button on the word page`;
+        throw duplicate_word;
       }
       // validate
       await newFormSchema.validateAsync(req.body.data);
@@ -43,12 +54,6 @@ export default async (req, res) => {
       });
     } catch (e) {
       await mongoose.connection.close();
-      /**
-        auth error
-        server error
-        db error
-       * 
-       */
 
       //  validation error
       if (e instanceof ValidationError) {
@@ -56,9 +61,12 @@ export default async (req, res) => {
           isOk: false,
           message: e.message,
         });
-      } else if (e.name === "duplicate") {
+      } else if (e.name === "Duplicate") {
         // Duplicate error
         res.status(400);
+        res.send({ isOk: false, message: e.message });
+      } else if (e.name === "AccessDenied") {
+        res.status(401);
         res.send({ isOk: false, message: e.message });
       } else {
         res.status(400);

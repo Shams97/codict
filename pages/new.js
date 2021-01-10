@@ -1,11 +1,25 @@
 /**@jsxRuntime classic */
 /**@jsx jsx */
-import { withAuthenticationRequired } from "@auth0/auth0-react";
+
 import { jsx } from "theme-ui";
 import Layout from "../components/layout/Layout";
 import CustomStepper from "../components/newForm/Stepper";
 import NewFormCtx from "../ctx/forms/new/newFormCTX";
+import { useSession } from "next-auth/client";
+import AccessDenied from "../components/auth/AccessDenied";
+
 function New({}) {
+  const [session, loading] = useSession();
+  if (loading) return null;
+
+  if (!loading && !session) {
+    return (
+      <Layout includeSearchInput={false}>
+        <AccessDenied />
+      </Layout>
+    );
+  }
+
   return (
     <Layout includeSearchInput={false}>
       <NewFormCtx>
@@ -15,4 +29,4 @@ function New({}) {
   );
 }
 
-export default withAuthenticationRequired(New);
+export default New;

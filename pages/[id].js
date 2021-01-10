@@ -7,12 +7,13 @@ import { Container } from "reactstrap";
 import Description from "../components/info/Description";
 import InfoTable from "../components/info/Table";
 import Synonyms from "../components/info/Synonyms";
-import InitialError from "../components/layout/InitialError";
 import LinksGroup from "../components/info/links/LinksGroup";
 import { useRouter } from "next/router";
 import useSWR from "swr";
 import OptimisticDescription from "../components/optimistic/Description";
 import OptimisticTable from "../components/optimistic/Table";
+import WordFetchError from "../components/layout/WordFetchError";
+import { object } from "joi";
 
 const _SX = {
   header: {
@@ -31,59 +32,66 @@ export default function WordPage() {
   const [counter, setCounter] = useState(0);
   const router = useRouter();
 
+  /************************************************
+   ************************************************
+   ******** FETCH WORD DATA FROM API/DB************
+   ************************************************
+   ************************************************
+   */
   const fetcher = (url) => fetch(url).then((res) => res.json());
   const { data, error } = useSWR(
     router.query.id ? `/api/${router.query.id}` : null,
     fetcher
   );
-  if (error) {
-    setInitialError({
-      isError: true,
-      message: "Something Went Wrong...Refresh the page.",
-    });
-  } else {
-    let title, description, keywords, words;
-    if (data) {
-      ({ title, description, keywords } = data.formated[0].seo);
 
-      words = data.formated.sort((a, b) => {
-        return b.db.social[0].count - a.db.social[0].count;
-      });
-    }
-    /**
-     * TODO : fix why sometimes page does not load and ask for data (data.formated is undefined)
-     */
+  if (error || (data && data.formated === null)) {
+    return (
+      <Layout title="codict" description="codict">
+        <Container>
+          <WordFetchError />
+        </Container>
+      </Layout>
+    );
+  } else if (data) {
+    let title, description, keywords, words;
+
+    ({ title, description, keywords } = data.formated[0].seo);
+
+    words = data.formated.sort((a, b) => {
+      return b.db.social[0].count - a.db.social[0].count;
+    });
+
     return (
       <Layout
-        title={data ? "codict" : title}
-        description={data ? "codict" : description}
-        keywords={data ? "codict" : keywords}
+        title={data ? title : "codict"}
+        description={data ? description : "codict"}
+        keywords={data ? keywords : ["codict"]}
       >
         <Container>
-          {/* if error fetching word data display initial error component */}
-          {initialError.isError && <InitialError message={initialError} />}
+          <Description
+            words={words}
+            availableWords={{
+              counter,
+              setCounter,
+              wordsCount: words.length - 1,
+            }}
+          />
 
-          {!data ? (
-            <OptimisticDescription />
-          ) : (
-            <Description
-              words={words}
-              availableWords={{
-                counter,
-                setCounter,
-                wordsCount: words.length - 1,
-              }}
-            />
-          )}
-          {data ? (
-            <Fragment>
-              <InfoTable words={words} counter={counter} />
-              <Synonyms words={words} counter={counter} />
-              <LinksGroup words={words} counter={counter} />
-            </Fragment>
-          ) : (
-            <OptimisticTable />
-          )}
+          <Fragment>
+            <InfoTable words={words} counter={counter} />
+            <Synonyms words={words} counter={counter} />
+            <LinksGroup words={words} counter={counter} />
+          </Fragment>
+        </Container>
+      </Layout>
+    );
+  } else {
+    return (
+      <Layout title={"codict"} description={"codict"} keywords={["codict"]}>
+        <Container>
+          <OptimisticDescription />
+
+          <OptimisticTable />
         </Container>
       </Layout>
     );

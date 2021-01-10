@@ -1,7 +1,6 @@
 /**@jsxRuntime classic */
 /**@jsx jsx */
-import { Container, jsx } from "theme-ui";
-import { Col, Row } from "reactstrap";
+import { jsx } from "theme-ui";
 import styles from "../../styles/optimistic.module.scss";
 
 const OptimisticInput = () => {

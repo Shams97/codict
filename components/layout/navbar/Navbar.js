@@ -3,62 +3,62 @@
 import { jsx, Text } from "theme-ui";
 import { useState } from "react";
 import Link from "next/link";
-import { Collapse, Navbar, NavbarToggler, Nav, NavItem } from "reactstrap";
+import { Collapse, Navbar, NavbarToggler, Nav } from "reactstrap";
 import ToggleColors from "./toggleColorMode";
 import NavButton from "./NavButton";
-import { useAuth0 } from "@auth0/auth0-react";
 import User from "../navbar/User";
 import Logout from "../navbar/Logout";
 import Login from "../navbar/Login";
+import { useSession } from "next-auth/client";
+const _SX = {
+  navbar: {
+    backgroundColor: "background",
+  },
+  navbarBrand: {
+    "@media(max-width: 768px)": {
+      justifyContent: "space-between",
+    },
+
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "flex-start",
+    width: "100%",
+  },
+  navbarBrandAnchor: {
+    color: "text",
+    textDecoration: "none",
+    ":hover": {
+      cursor: "pointer",
+      textDecoration: "none",
+      color: "text",
+    },
+  },
+
+  toggler: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-between",
+    outline: "none",
+
+    ": focus": {
+      outline: "none",
+    },
+    "& span": {
+      marginTop: "3px",
+      width: "5px",
+      height: "5px",
+      borderRadius: "50%",
+      backgroundColor: "text",
+    },
+  },
+};
 const AppNav = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const { isLoading, isAuthenticated, user } = useAuth0();
-  const _SX = {
-    navbar: {
-      backgroundColor: "background",
-    },
-    navbarBrand: {
-      "@media(max-width: 768px)": {
-        justifyContent: "space-between",
-      },
-
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "flex-start",
-      width: "100%",
-    },
-    navbarBrandAnchor: {
-      color: "text",
-      textDecoration: "none",
-      ":hover": {
-        cursor: "pointer",
-        textDecoration: "none",
-        color: "text",
-      },
-    },
-
-    toggler: {
-      display: "flex",
-      flexDirection: "column",
-      justifyContent: "space-between",
-      outline: "none",
-
-      ": focus": {
-        outline: "none",
-      },
-      "& span": {
-        marginTop: "3px",
-        width: "5px",
-        height: "5px",
-        borderRadius: "50%",
-        backgroundColor: "text",
-      },
-    },
-  };
 
   const toggle = () => {
     setIsOpen(!isOpen);
   };
+  const [session, loading] = useSession();
 
   return (
     <div>
@@ -91,12 +91,10 @@ const AppNav = () => {
               as="link"
               linkDetails={{ url: "/about", text: "About" }}
             />
-
             <ToggleColors />
-
-            {!isLoading ? isAuthenticated ? <Logout /> : <Login /> : ""}
-
-            {isAuthenticated ? <User userInfo={user} /> : ""}
+            {!session && <Login />}
+            {session && <Logout />}
+            {session && <User userInfo={session} />}
           </Nav>
         </Collapse>
       </Navbar>

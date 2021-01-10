@@ -18,7 +18,7 @@ import UsefullTemplate from "./usefull/UsefullTemplate";
 import Synonyms from "../newForm/Synonyms";
 import { useRouter } from "next/router";
 import organizeFormData from "../../lib/pages/organizedFormData";
-import { useAuth0 } from "@auth0/auth0-react";
+import { useSession } from "next-auth/client";
 
 function getSteps() {
   return [
@@ -60,19 +60,21 @@ function getStepContent(step, operation_type) {
 }
 
 export default function CustomStepper({ newWord, edit, word }) {
+  // control stepper steps
   const [activeStep, setActiveStep] = useState(0);
   const steps = getSteps();
   const context = useThemeUI();
   const { theme } = context;
   const [newFormState, _] = useContext(newFormCTX);
   const [reqSpinner, setReqSpinner] = useState(false);
+  // control final step buttons (buttons are disabled when requesting)
   const [requesting, setRequesting] = useState(false);
   const [message, setMessage] = useState({
     msg: "",
     isOk: false,
   });
   const router = useRouter();
-  const { user } = useAuth0();
+  const [session, __] = useSession();
 
   const _SX = {
     back: {
@@ -117,7 +119,10 @@ export default function CustomStepper({ newWord, edit, word }) {
         isOk: false,
       });
       //  sort form data collected from UI form
-      const sortedFormData = organizeFormData(newFormState.formData, user);
+      const sortedFormData = organizeFormData(
+        newFormState.formData,
+        session.user.name
+      );
       /**
        * perform API request
        */
@@ -142,7 +147,7 @@ export default function CustomStepper({ newWord, edit, word }) {
             setActiveStep((prevActiveStep) => prevActiveStep + 1);
           }, 2500);
 
-          //on success navigate to the new word page
+          //on success navigate to home page
           setTimeout(() => {
             router.replace("/");
           }, 3000);
@@ -158,16 +163,14 @@ export default function CustomStepper({ newWord, edit, word }) {
             });
           } else if (error.request) {
             setReqSpinner(false);
-            // use custom error messages instead of default ones
             setMessage({
               msg: "Trouble making the request. Try again shortly",
               isOk: false,
             });
           } else {
             setReqSpinner(false);
-            // use custom error messages instead of default ones
             setMessage({
-              msg: "Trouble setting up the request. Try again shortly",
+              msg: "Trouble setting up the request. Try again shortly.",
               isOk: false,
             });
           }

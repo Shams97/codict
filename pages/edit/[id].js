@@ -1,26 +1,25 @@
 /**@jsxRuntime classic */
 /**@jsx jsx */
-import { withAuthenticationRequired } from "@auth0/auth0-react";
 import { useRouter } from "next/router";
 import { jsx } from "theme-ui";
 import Layout from "../../components/layout/Layout";
 import CustomStepper from "../../components/newForm/Stepper";
 import NewFormCtx from "../../ctx/forms/new/newFormCTX";
-
-// what to show while siging user in
-const onRedirecting = () => {
-  return (
-    /**
-     * TODO: Build a custom Redirecting Component to be used here and inside the Auth0Provider as well.
-     */
-    <div>
-      <h1>Signing you in....</h1>
-    </div>
-  );
-};
+import { useSession } from "next-auth/client";
+import AccessDenied from "../../components/auth/AccessDenied";
 
 function Edit() {
   const router = useRouter();
+  const [session, loading] = useSession();
+  if (loading) return null;
+
+  if (!loading && !session) {
+    return (
+      <Layout includeSearchInput={false}>
+        <AccessDenied />
+      </Layout>
+    );
+  }
 
   return (
     <Layout includeSearchInput={false}>
@@ -31,6 +30,4 @@ function Edit() {
   );
 }
 
-export default withAuthenticationRequired(Edit, {
-  onRedirecting,
-});
+export default Edit;

@@ -1,3 +1,8 @@
-2- API FIXES
-a- add a strategy if a page is not built due to DB ftech error (in route /[id] and /archive)
-b- add a strategy if a index.js page is not built due to dB fetch error inside (in page index.js)
+1- refactor api code
+2- fix navbar ui look
+3- insert space between nav and main
+4- build custom access denied comp
+5- build custom word fetch error comp
+6- build table for links
+7- build custom redirect pages fot next-auth
+8- polish github oAuth to becodict friendly

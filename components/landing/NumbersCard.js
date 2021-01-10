@@ -1,10 +1,11 @@
 /**@jsxRuntime classic */
 /**@jsx jsx */
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { jsx, Card, Text, Box } from "theme-ui";
-import axios from "axios";
+import { Col } from "reactstrap";
 import RealData from "./RealData";
-import OptimisticLine from "./OptimisticLine";
+import OptimisticLine from "../optimistic/OptimisticLine";
+import useSWR from "swr";
 
 const _SX = {
   root: {
@@ -20,45 +21,47 @@ const _SX = {
     padding: 0,
   },
 };
-const CustomCard = () => {
-  const [wordsCount, setWC] = useState(null);
-  const [contributersCount, setCC] = useState(null);
+const NumbersCard = () => {
+  const [wordsCount, setWC] = useState(0);
+  const [contributersCount, setCC] = useState(0);
 
-  useEffect(() => {
-    // fetch number of all words from DB
-    axios.get("/api/count/words").then((res) => {
-      setWC(res.data.message);
-    });
-    // fetch number of all contributers
-    axios.get("/api/count/contributors").then((res) => {
-      setCC(res.data.message);
-    });
-  }, []);
+  const fetcher = (url) => fetch(url).then((res) => res.json());
+  const { data } = useSWR("/api/count/contributions", fetcher);
+
+  // this condition prevents react-too many re-renders!!
+  if (data && wordsCount < 1) {
+    if (!(wordsCount > 0)) {
+      setWC(data.words);
+      setCC(data.contributions);
+    }
+  }
 
   return (
-    <Card sx={_SX.root}>
-      <Text as="h5" className="mb-4 mt-2 text-center">
-        Numbers
-      </Text>
-      <Box>
-        <ul className="text-left" sx={_SX.list}>
-          <li className="mt-1 text-center">
-            {wordsCount === null ? (
-              <OptimisticLine />
-            ) : (
-              <RealData number={wordsCount} word="Words" />
-            )}
-          </li>
-          <li className="mt-1">
-            {contributersCount === null ? (
-              <OptimisticLine />
-            ) : (
-              <RealData number={contributersCount} word="Contributions" />
-            )}
-          </li>
-        </ul>
-      </Box>
-    </Card>
+    <Col sm="12 my-4" md="4">
+      <Card sx={_SX.root}>
+        <Text as="h5" className="mb-4 mt-2 text-center">
+          Numbers
+        </Text>
+        <Box>
+          <ul className="text-left" sx={_SX.list}>
+            <li className="mt-1 text-center">
+              {wordsCount === 0 ? (
+                <OptimisticLine />
+              ) : (
+                <RealData number={wordsCount} word="Words" />
+              )}
+            </li>
+            <li className="mt-1">
+              {contributersCount === 0 ? (
+                <OptimisticLine />
+              ) : (
+                <RealData number={contributersCount} word="Contributions" />
+              )}
+            </li>
+          </ul>
+        </Box>
+      </Card>
+    </Col>
   );
 };
-export default CustomCard;
+export default NumbersCard;

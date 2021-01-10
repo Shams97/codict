@@ -1,14 +1,11 @@
-/**@jsxRuntime classic */
-/**@jsx jsx */
-import { Col, Row } from "reactstrap";
-import { jsx, Text } from "theme-ui";
+import { Row } from "reactstrap";
+import { Text } from "theme-ui";
 import SuppotrCard from "../components/landing/SupportCard";
 import Layout from "../components/layout/Layout";
 export default function About() {
   return (
     <Layout
       title="About"
-      keywords="codict, computer, science, terms, software, development, web, development, software engineering, words"
       description="Code dictionary or, codict, is a place where Computer Science and Computer Engineering technical terms and terminology live. If while you learn something, and come across some term/word that makes no sense to you, use codict search box to find out about."
       includeSearchInput={false}
     >
@@ -30,21 +27,14 @@ export default function About() {
         will find curated definitions and brief introductions to to whatever
         term you might face as you learn.
       </Text>
-      <Row
-        className="text-center"
-        sx={{
-          flexDirection: "row",
-          justifyContent: "center",
-          alignItems: "flex-start",
-        }}
-      >
-        <Col sm="12 my-4" md="4">
-          <SuppotrCard />
-        </Col>
+      <Row className="text-center d-flex justify-content-center align-items-start">
+        <SuppotrCard />
       </Row>
       <footer className="text-center mx-auto mt-4">
         codict with love{" "}
-        <a href="https://twitter.com/gist32091948">@gistcodee</a>
+        <a href="https://twitter.com/gist32091948" target="_new">
+          @gistcodee
+        </a>
       </footer>
     </Layout>
   );

@@ -1,6 +1,6 @@
 module.exports = {
   poweredByHeader: false,
   images: {
-    domains: ["lh5.googleusercontent.com"],
+    domains: ["avatars2.githubusercontent.com"],
   },
 };

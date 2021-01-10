@@ -9,6 +9,7 @@ const RealData = ({ number, word }) => {
 
   useEffect(() => {
     let i = 0;
+
     while (i < number) {
       setTimeout(() => {
         setRoll(() => {
