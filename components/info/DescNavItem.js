@@ -2,23 +2,26 @@
 /**@jsx jsx */
 import { jsx } from "theme-ui";
 import { useRouter } from "next/router";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import IconButton from "@material-ui/core/IconButton";
 import Badge from "@material-ui/core/Badge";
-import axios from "axios";
+import { fetchErr } from "../../ctx/notification/FetchErrCtx";
+import requestLike from "./lib/requestLike";
+import requestDislike from "./lib/requestDislike";
 
 /**
  *
  * @param {*} social array of objects composed of like, dislike and edit button
  * @param {*} word word name
- * @param {*} order roder of word definition inside DB
+ * @param {*} order order of word definition inside DB
  */
 export default function DescNavItem({ social, word, order, wordsCount }) {
   const router = useRouter();
   const [obj, setObj] = useState({});
   const [likes, setLikes] = useState({});
   const [dislikes, setDisLikes] = useState({});
+  const [fetchErrCtxState, setFetchErrCtxState] = useContext(fetchErr);
 
   const _SX = {
     socialItem: {
@@ -59,14 +62,8 @@ export default function DescNavItem({ social, word, order, wordsCount }) {
           };
         }
       });
-      //send like request
-      /**
-       * like : number of likes
-       * word: {name: word name , order: position of word definition inside DB}
-       */
-      axios.put("/api/like", {
-        data: { like: 1, word: { name: word, order } },
-      });
+
+      requestLike(word, order, fetchErrCtxState, setFetchErrCtxState);
     } else {
       // send dislike
       setDisLikes((prev) => {
@@ -81,15 +78,9 @@ export default function DescNavItem({ social, word, order, wordsCount }) {
           };
         }
       });
+
+      requestDislike(word, order, fetchErrCtxState, setFetchErrCtxState);
     }
-    //send dislike request
-    /**
-     * dislike : number of likes
-     * word: {name: word name , order: position of word definition inside DB}
-     */
-    axios.put("/api/dislike", {
-      data: { dislike: 1, word: { name: word, order } },
-    });
   };
   /**
    * Sets an object of the form {definition-0:, definition-1:,...}

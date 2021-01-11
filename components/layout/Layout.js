@@ -5,6 +5,7 @@ import AppNav from "./navbar/Navbar";
 import { Container, Row, Col } from "reactstrap";
 import Search from "./search/Search";
 import CustomHead from "./Head";
+import FetchError from "./notifications/FetchError";
 
 const defaultKeywords = [
   "computer",
@@ -42,7 +43,8 @@ export default function Layout({
         />
         <AppNav />
       </header>
-      <main>
+      <main className="mt-4">
+        <FetchError />
         <Container>
           <Row>
             {includeSearchInput && <Search />}

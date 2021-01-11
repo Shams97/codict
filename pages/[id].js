@@ -12,7 +12,7 @@ import { useRouter } from "next/router";
 import useSWR from "swr";
 import OptimisticDescription from "../components/optimistic/Description";
 import OptimisticTable from "../components/optimistic/Table";
-import WordFetchError from "../components/layout/WordFetchError";
+import WordFetchError from "../components/layout/errors/WordFetchError";
 import { object } from "joi";
 
 const _SX = {

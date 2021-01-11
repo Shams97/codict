@@ -7,6 +7,12 @@ import jwt from "next-auth/jwt";
 
 export default async (req, res) => {
   if (req.method === "POST") {
+    /********************************
+     ********************************
+     ******CREATE CUSTOM ERRORS*****
+     ********************************
+     ********************************
+     */
     const not_allowd_to_edit = new Error();
     not_allowd_to_edit.name = "EditNotAllowed";
 
@@ -16,11 +22,25 @@ export default async (req, res) => {
     const secret = process.env.SECRET;
 
     try {
+      /********************************
+       ********************************
+       ******CHECK IF SIGNED IN********
+       ********************************
+       ********************************
+       */
       const token = await jwt.getToken({ req, res });
       if (!token) {
         not_signed_in.message = "You need to Sing in First.";
         throw not_signed_in;
       }
+
+      /********************************
+       ********************************
+       ******GRAB DATA AND VALIDATE****
+       ********************************
+       ********************************
+       */
+
       // connect to DB
       await connectAtlas({ user: true });
       // check if word does not exist in DB
@@ -44,6 +64,12 @@ export default async (req, res) => {
       // delete value.id;
       const doc = await WordList.findOne({ word: req.body.data.name });
       doc.list.push({ ...value });
+      /********************************
+       ********************************
+       ******SAVE TO DB AND RESPONDE***
+       ********************************
+       ********************************
+       */
       await doc.save();
       res.status(200);
       res.json({ isOk: true, message: "Successfully added" });

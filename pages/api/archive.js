@@ -20,13 +20,21 @@ function reduceSynonyms(options) {
 export default async function archive(req, res) {
   if (req.method === "GET") {
     try {
+      /********************************
+       ********************************
+       ******  GRAB DATA FROM DB    ***
+       ********************************
+       ********************************
+       */
       await connectAtlas({ user: true });
-      const list = await WordList.find().select("word -_id").lean().exec();
-      res.statusCode = 200;
-      const clean = list.map((entry) => {
-        return { value: entry.word, label: entry.word };
-      });
       const test = await WordList.find().select("word list -_id");
+
+      /********************************
+       ********************************
+       ******  ORGANISE DATA FOR UI ***
+       ********************************
+       ********************************
+       */
       const groupedOptions = [];
       for (let i = 0; i < test.length; i++) {
         // loop word
@@ -55,6 +63,12 @@ export default async function archive(req, res) {
         });
       }
 
+      /********************************
+       ********************************
+       ******  RESPONDE TO REQUEST  ***
+       ********************************
+       ********************************
+       */
       await mongoose.connection.close();
       res.statusCode = 200;
       res.json({ groupedOptions });

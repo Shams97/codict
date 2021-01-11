@@ -9,19 +9,30 @@ import Option from "./Option";
 import NoOptionsMessage from "./NoOptionMessage";
 import useLabels from "../../../lib/pages/useLabels";
 import OptimisticInput from "../../optimistic/OptimisticInput";
-import InitialError from "../InitialError";
+import InitialError from "../errors/InitialError";
 
 export default function Search() {
   const router = useRouter();
-  var { data, error } = useLabels();
+  const { data, error } = useLabels();
+
   const handleChange = (inputValue, { action }) => {
     // on user selection
     // use next router here to navigate to selected word page
     inputValue !== null && router.push(`/${inputValue.value}`);
   };
+
   if (data) {
     return (
-      <Col xs="12" md="8" className="mx-auto my-4">
+      <Col
+        xs="12"
+        md="8"
+        className="mx-auto my-4"
+        sx={{
+          "@media(min-width: 768px)": {
+            marginTop: "10rem !important",
+          },
+        }}
+      >
         <CreatableSelect
           id="1"
           instanceId="1"

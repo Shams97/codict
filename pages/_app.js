@@ -49,6 +49,7 @@ import {
 import { library } from "@fortawesome/fontawesome-svg-core";
 import ThemeUICTX from "../ctx/themes/ThemeUI-Ctx";
 import MaterialUICTX from "../ctx/themes/MateriaUI-Ctx";
+import FetchErrCtx from "../ctx/notification/FetchErrCtx";
 import { Provider } from "next-auth/client";
 
 library.add(
@@ -102,9 +103,11 @@ export default function MyApp({ Component, pageProps }) {
   return (
     <ThemeUICTX>
       <MaterialUICTX>
-        <Provider session={pageProps.session}>
-          <Component {...pageProps} />
-        </Provider>
+        <FetchErrCtx>
+          <Provider session={pageProps.session}>
+            <Component {...pageProps} />
+          </Provider>
+        </FetchErrCtx>
       </MaterialUICTX>
     </ThemeUICTX>
   );

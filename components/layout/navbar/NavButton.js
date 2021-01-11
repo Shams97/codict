@@ -18,11 +18,11 @@ export default function NavButton({
           color="text"
           backgroundColor="background"
           sx={{
-            border: "1px solid",
-            borderColor: "text",
+            borderRadius: "0px",
+            borderBottom: "1px solid",
+            borderColor: "transparent",
             ":hover": {
-              color: "background",
-              backgroundColor: "text",
+              borderColor: "text",
             },
           }}
         >
@@ -35,17 +35,17 @@ export default function NavButton({
           <a
             className="mx-3 my-md-3 my-3"
             sx={{
-              border: "1px solid",
-              borderColor: "text",
+              borderBottom: "1px solid",
+              borderColor: "transparent",
               color: "text",
               backgroundColor: "background",
               textDecoration: "none",
               padding: "0.5rem 0.8rem",
-              borderRadius: "5px",
+
               ":hover": {
                 textDecoration: "none",
-                color: "background",
-                backgroundColor: "text",
+                borderColor: "text",
+                color: "text",
               },
             }}
           >

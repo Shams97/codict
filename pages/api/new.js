@@ -8,6 +8,12 @@ import jwt from "next-auth/jwt";
 
 export default async (req, res) => {
   if (req.method === "POST") {
+    /********************************
+     ********************************
+     ******CREATE CUSTOM ERRORS*****
+     ********************************
+     ********************************
+     */
     const duplicate_word = new Error();
     duplicate_word.name = "Duplicate";
 
@@ -16,11 +22,24 @@ export default async (req, res) => {
 
     const secret = process.env.SECRET;
     try {
+      /********************************
+       ********************************
+       ******CHECK IF SIGNED IN********
+       ********************************
+       ********************************
+       */
       const token = await jwt.getToken({ req, res });
       if (!token) {
         not_signed_in.message = "You need to Sing in First.";
         throw not_signed_in;
       }
+
+      /********************************
+       ********************************
+       ******GRAB DATA AND VALIDATE****
+       ********************************
+       ********************************
+       */
       //connect to DB based on auth/role
       await connectAtlas({ user: true });
       // check for duplicates if any (same word/term added more than once)
@@ -45,6 +64,12 @@ export default async (req, res) => {
         word: req.body.data.name,
       });
 
+      /********************************
+       ********************************
+       ******SAVE TO DB AND RESPONDE***
+       ********************************
+       ********************************
+       */
       await doc.save();
       await mongoose.connection.close();
       res.statusCode = 200;
@@ -55,22 +80,23 @@ export default async (req, res) => {
     } catch (e) {
       await mongoose.connection.close();
 
-      //  validation error
+      // HANDEL VALIDATION ERR
       if (e instanceof ValidationError) {
         res.status(400).send({
           isOk: false,
           message: e.message,
         });
       } else if (e.name === "Duplicate") {
-        // Duplicate error
+        // HANDLE DUPLICATE ERR
         res.status(400);
         res.send({ isOk: false, message: e.message });
       } else if (e.name === "AccessDenied") {
+        // HANDLE AUTH ERR
         res.status(401);
         res.send({ isOk: false, message: e.message });
       } else {
+        // HANDLE REST OF ERRORS
         res.status(400);
-        // rest of errors (db,..)
         res.send({ isOk: false, message: e.message });
       }
     }

@@ -1,11 +1,16 @@
 import connectAtlas from "../../lib/api/db/connect";
 import wordsList from "../../lib/api/db/schemas/newWord";
 
-const customError = new Error();
-customError.name = "NotOneIntiger";
-
 export default async function (req, res) {
   if (req.method === "PUT") {
+    /********************************
+     ********************************
+     ******CREATE CUSTOM ERRORS*****
+     ********************************
+     ********************************
+     */
+    const not_integer = new Error();
+    not_integer.name = "NotOneIntiger";
     try {
       // check if authed
       const dislike = req.body.data.dislike;
@@ -15,6 +20,13 @@ export default async function (req, res) {
         dislike > 0 &&
         dislike < 2
       ) {
+        /********************************
+         ********************************
+         ******GET DATA AND ADD DISLIKE****
+         ********************************
+         ********************************
+         */
+
         //connect to DB
         await connectAtlas({ user: true });
 
@@ -25,20 +37,21 @@ export default async function (req, res) {
         doc.list[req.body.data.word.order].social[1].count += 1;
         await doc.save();
         res.status(200);
-        res.send({ isOk: true, message: "" });
+        res.end();
       } else {
-        customError.message =
+        not_integer.message =
           "user provided a non intiger value. something is malicous here";
-        throw customError;
+        throw not_integer;
       }
     } catch (e) {
+      // HANDLE CUSTOM ERROR
       if (e.name === "NotOneIntiger") {
         res.status(400);
-        res.send({ isOk: false, message: e.message });
+        res.end();
       } else {
         res.status(400);
-        // rest of errors (db,..)
-        res.send({ isOk: false, message: e.message });
+        // rest of errors
+        res.end();
       }
     }
   }
