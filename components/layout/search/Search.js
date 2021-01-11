@@ -29,7 +29,7 @@ export default function Search() {
         className="mx-auto my-4"
         sx={{
           "@media(min-width: 768px)": {
-            marginTop: "10rem !important",
+            marginTop: "8rem !important",
           },
         }}
       >

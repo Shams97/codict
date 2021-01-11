@@ -17,6 +17,9 @@ const options = {
   },
   secret: process.env.SECRET,
   debug: true,
+  pages: {
+    signIn: "/auth/signin",
+  },
 };
 
 export default (req, res) => NextAuth(req, res, options);

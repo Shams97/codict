@@ -17,22 +17,25 @@ const defaultKeywords = [
   "javascript",
   "linux",
 ];
-const _SX = {
-  header: {
-    height: "100px",
-  },
 
-  div: {
-    width: "100%",
-  },
-};
 export default function Layout({
   children,
   title,
   description,
   keywords = defaultKeywords,
   includeSearchInput = true,
+  bluredBg = false,
 }) {
+  const _SX = {
+    header: {
+      height: "100px",
+    },
+
+    div: {
+      width: "100%",
+      filter: bluredBg && "blur(8px)",
+    },
+  };
   return (
     <div sx={_SX.div}>
       <header sx={_SX.header}>

@@ -1,7 +1,7 @@
 /**@jsxRuntime classic */
 /**@jsx jsx */
 import { jsx, Text } from "theme-ui";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Collapse, Navbar, NavbarToggler, Nav } from "reactstrap";
 import ToggleColors from "./toggleColorMode";
@@ -59,7 +59,6 @@ const AppNav = () => {
     setIsOpen(!isOpen);
   };
   const [session, loading] = useSession();
-
   return (
     <div>
       <Navbar fixed="top" expand="md" sx={_SX.navbar}>

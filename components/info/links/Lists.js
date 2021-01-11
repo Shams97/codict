@@ -40,7 +40,7 @@ export default function Lists({
 
     links: {
       transition: "height 1s linear",
-      listStyle: "none",
+      listStyle: "square",
       position: "relative",
       height: CTX.length > 5 && more === false ? "120px" : "auto",
       overflow: "hidden",
@@ -89,7 +89,7 @@ export default function Lists({
 
   return (
     <div sx={_SX.root}>
-      <h5 className="mb-4">
+      <h5 className="mb-4 d-flex align-items-center">
         <FontAwesomeIcon
           icon={
             header === "Books" ? "book" : header === "Videos" ? "video" : "link"
@@ -99,11 +99,19 @@ export default function Lists({
           className="mx-3"
           sx={_SX.headerIcon}
         />
+        <span>
+          {header === "Books"
+            ? "Books :"
+            : header === "Videos"
+            ? "Vids :"
+            : "Links :"}
+        </span>
       </h5>
+
       <ul sx={_SX.links}>
         {CTX.map((link, i) => {
           return (
-            <li key={i}>
+            <li key={i} className="ml-4 mt-2">
               <a href={link.dest} target="_new">
                 {link.title}
               </a>

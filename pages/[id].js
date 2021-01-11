@@ -13,7 +13,6 @@ import useSWR from "swr";
 import OptimisticDescription from "../components/optimistic/Description";
 import OptimisticTable from "../components/optimistic/Table";
 import WordFetchError from "../components/layout/errors/WordFetchError";
-import { object } from "joi";
 
 const _SX = {
   header: {
@@ -25,10 +24,6 @@ const _SX = {
 };
 
 export default function WordPage() {
-  const [initialError, setInitialError] = useState({
-    isError: false,
-    message: "",
-  });
   const [counter, setCounter] = useState(0);
   const router = useRouter();
 
@@ -90,7 +85,6 @@ export default function WordPage() {
       <Layout title={"codict"} description={"codict"} keywords={["codict"]}>
         <Container>
           <OptimisticDescription />
-
           <OptimisticTable />
         </Container>
       </Layout>

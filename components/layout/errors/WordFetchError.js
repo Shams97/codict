@@ -1,6 +1,6 @@
 /**@jsxRuntime classic */
 /**@jsx jsx */
-import { jsx } from "theme-ui";
+import { jsx, Spinner } from "theme-ui";
 
 export default function WordFetchError() {
   return (
@@ -14,9 +14,8 @@ export default function WordFetchError() {
         alignItems: "center",
       }}
     >
-      <div>
-        Could not Fetch Word You Were Looking For. Try to Refresh The Page.
-      </div>
+      <h5>Problem While Fetching Data</h5>
+      <Spinner size="25px" className="mx-1 pb-2" />
     </div>
   );
 }

@@ -45,6 +45,7 @@ import {
   faFedora,
   faCentos,
   faWindows,
+  faGithub,
 } from "@fortawesome/free-brands-svg-icons";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import ThemeUICTX from "../ctx/themes/ThemeUI-Ctx";
@@ -96,7 +97,8 @@ library.add(
   faSuse,
   faFedora,
   faCentos,
-  faWindows
+  faWindows,
+  faGithub
 );
 
 export default function MyApp({ Component, pageProps }) {
