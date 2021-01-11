@@ -3,7 +3,7 @@
 
 import { jsx, Box, Label, Textarea, Alert } from "theme-ui";
 import { useContext, useEffect, useState } from "react";
-import { newFormCTX } from "../../ctx/forms/new/newFormCTX";
+import { newFormCTX } from "../../ctx/forms/newFormCTX";
 import { descriptionSchema } from "../newForm/schema/schema";
 
 const _SX = {
@@ -55,8 +55,12 @@ export default function Description({}) {
 
   return (
     <Box as="form">
+      <Label htmlFor="desc" sx={{ visibility: "hidden" }}>
+        Description
+      </Label>
       <div>
         <Textarea
+          id="desc"
           className="mt-4"
           name="description"
           placeholder="Description"

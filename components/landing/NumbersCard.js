@@ -22,6 +22,9 @@ const _SX = {
     justifyContent: "center",
     padding: 0,
   },
+  headingAccessibility: {
+    fontSize: "28px",
+  },
 };
 const NumbersCard = () => {
   const [fetchErrCtxState, setFetchErrCtxState] = useContext(fetchErr);
@@ -39,7 +42,11 @@ const NumbersCard = () => {
     return (
       <Col sm="12 my-4" md="4">
         <Card sx={_SX.root}>
-          <Text as="h5" className="mb-4 mt-2 text-center">
+          <Text
+            as="h1"
+            sx={_SX.headingAccessibility}
+            className="mb-4 mt-2 text-center"
+          >
             Numbers
           </Text>
           <Box>
@@ -59,7 +66,11 @@ const NumbersCard = () => {
     return (
       <Col sm="12 my-4" md="4">
         <Card sx={_SX.root}>
-          <Text as="h5" className="mb-4 mt-2 text-center">
+          <Text
+            as="h1"
+            sx={_SX.headingAccessibility}
+            className="mb-4 mt-2 text-center"
+          >
             Numbers
           </Text>
           <Box>

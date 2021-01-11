@@ -1,9 +1,9 @@
 /**@jsxRuntime classic */
 /**@jsx jsx */
 
-import { jsx, Box, Input, Alert } from "theme-ui";
+import { jsx, Box, Input, Alert, Label } from "theme-ui";
 import { useContext, useEffect, useState } from "react";
-import { newFormCTX } from "../../ctx/forms/new/newFormCTX";
+import { newFormCTX } from "../../ctx/forms/newFormCTX";
 import { nameSchema } from "../newForm/schema/schema";
 import { useRouter } from "next/router";
 
@@ -89,6 +89,9 @@ export default function Name({ edit, newWord, word }) {
   return (
     <Box as="form">
       <div>
+        <Label htmlFor="name" sx={{ visibility: "hidden" }}>
+          Name
+        </Label>
         <Input
           disabled={edit ? true : false}
           className="mt-4"
@@ -97,6 +100,7 @@ export default function Name({ edit, newWord, word }) {
           type="text"
           onChange={handleName}
           value={name}
+          id="name"
         />
         {nameAlert.length > 0 && <Alert sx={_SX.alert}>{nameAlert}</Alert>}
       </div>

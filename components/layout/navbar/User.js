@@ -3,7 +3,6 @@
 
 import { jsx } from "theme-ui";
 import Image from "next/image";
-import { useEffect } from "react";
 
 const _sx = {
   root: {

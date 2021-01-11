@@ -8,12 +8,15 @@ const _SX = {
     borderColor: "highlight",
     borderRadius: "5px",
   },
+  headingAccessibility: {
+    fontSize: "28px",
+  },
 };
-const WhyCard = (props) => {
+const WhyCard = () => {
   return (
     <Col sm="12 my-4" md="4">
       <Card sx={_SX.root}>
-        <Text as="h3" className="mb-4 mt-2">
+        <Text as="h2" sx={_SX.headingAccessibility} className="mb-4 mt-2">
           Why?
         </Text>
         <Box>

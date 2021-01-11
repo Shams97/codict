@@ -4,7 +4,7 @@
 import { jsx } from "theme-ui";
 import Layout from "../components/layout/Layout";
 import CustomStepper from "../components/newForm/Stepper";
-import NewFormCtx from "../ctx/forms/new/newFormCTX";
+import NewFormCtx from "../ctx/forms/newFormCTX";
 import { useSession } from "next-auth/client";
 import AccessDenied from "../components/auth/AccessDenied";
 

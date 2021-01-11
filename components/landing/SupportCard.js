@@ -9,11 +9,14 @@ const SuppotrCard = () => {
       borderColor: "highlight",
       borderRadius: "5px",
     },
+    headingAccessibility: {
+      fontSize: "28px",
+    },
   };
   return (
     <Col sm="12 my-4" md="4">
       <Card sx={_SX.root}>
-        <Text as="h3" className="mb-4 mt-2">
+        <Text as="h3" sx={_SX.headingAccessibility} className="mb-4 mt-2">
           Support
         </Text>
         <Box>

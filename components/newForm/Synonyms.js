@@ -1,8 +1,8 @@
 /**@jsxRuntime classic */
 /**@jsx jsx */
 import { useState, useContext, useEffect } from "react";
-import { jsx, Input, Button } from "theme-ui";
-import { newFormCTX } from "../../ctx/forms/new/newFormCTX";
+import { jsx, Input, Button, Label } from "theme-ui";
+import { newFormCTX } from "../../ctx/forms/newFormCTX";
 
 const _SX = {
   remove: {
@@ -62,7 +62,11 @@ export default function Synonyms() {
 
   return (
     <div>
+      <Label htmlFor="synonyms" sx={{ visibility: "hidden" }}>
+        Synonyms
+      </Label>
       <Input
+        id="synonyms"
         value={type}
         className="border mt-4"
         onChange={handleChange}

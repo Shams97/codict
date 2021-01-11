@@ -3,8 +3,8 @@
 
 import { jsx } from "theme-ui";
 import { useState, useContext } from "react";
-import { newFormCTX } from "../../../ctx/forms/new/newFormCTX";
-import { allNoneCtx } from "../../../ctx/forms/new/allNoneCtx";
+import { newFormCTX } from "../../../ctx/forms/newFormCTX";
+import { allNoneCtx } from "../../../ctx/forms/allNoneCtx";
 
 import {
   langIconsNames,

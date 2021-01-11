@@ -4,10 +4,10 @@
 import { jsx } from "theme-ui";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState, useContext } from "react";
-import { newFormCTX } from "../../../ctx/forms/new/newFormCTX";
+import { newFormCTX } from "../../../ctx/forms/newFormCTX";
 import All from "./All";
 import None from "./None";
-import NoneAllCtx, { allNoneCtx } from "../../../ctx/forms/new/allNoneCtx";
+import NoneAllCtx, { allNoneCtx } from "../../../ctx/forms/allNoneCtx";
 
 const _SX = {
   root: {

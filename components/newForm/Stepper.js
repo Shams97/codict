@@ -11,7 +11,7 @@ import Button from "@material-ui/core/Button";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import Name from "../../components/newForm/Name";
-import { newFormCTX } from "../../ctx/forms/new/newFormCTX";
+import { newFormCTX } from "../../ctx/forms/newFormCTX";
 import Description from "./Description";
 import UsedIn from "./used-in/UsedIn";
 import UsefullTemplate from "./usefull/UsefullTemplate";

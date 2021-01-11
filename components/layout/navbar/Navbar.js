@@ -1,7 +1,7 @@
 /**@jsxRuntime classic */
 /**@jsx jsx */
 import { jsx, Text } from "theme-ui";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import { Collapse, Navbar, NavbarToggler, Nav } from "reactstrap";
 import ToggleColors from "./toggleColorMode";
@@ -86,14 +86,18 @@ const AppNav = () => {
               justifyContent: "center",
             }}
           >
-            <NavButton
-              as="link"
-              linkDetails={{ url: "/about", text: "About" }}
-            />
-            <ToggleColors />
-            {!session && <Login />}
-            {session && <Logout />}
-            {session && <User userInfo={session} />}
+            <li>
+              <NavButton
+                as="link"
+                linkDetails={{ url: "/about", text: "About" }}
+              />
+            </li>
+            <li>
+              <ToggleColors />
+            </li>
+            <li>{!session && <Login />}</li>
+            <li>{session && <Logout />}</li>
+            <li>{session && <User userInfo={session} />}</li>
           </Nav>
         </Collapse>
       </Navbar>

@@ -15,7 +15,7 @@
 import { jsx, Label, Input } from "theme-ui";
 import { Row, Col } from "reactstrap";
 import { useEffect, useState, useContext } from "react";
-import { newFormCTX } from "../../../ctx/forms/new/newFormCTX";
+import { newFormCTX } from "../../../ctx/forms/newFormCTX";
 import { linkSchema, titleSchema } from "../schema/schema";
 import { Button } from "@material-ui/core";
 

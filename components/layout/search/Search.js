@@ -1,6 +1,6 @@
 /**@jsxRuntime classic */
 /**@jsx jsx */
-import { jsx } from "theme-ui";
+import { jsx, Label } from "theme-ui";
 import CreatableSelect from "react-select";
 import { useRouter } from "next/router";
 import { Col } from "reactstrap";
@@ -33,10 +33,13 @@ export default function Search() {
           },
         }}
       >
+        <Label htmlFor="1+id" sx={{ visibility: "hidden" }}>
+          Search
+        </Label>
         <CreatableSelect
-          id="1"
-          instanceId="1"
-          inputId="1"
+          id="1+id"
+          instanceId="1+instanceId"
+          inputId="1+InputId"
           name="words"
           isClearable
           isSearchable
