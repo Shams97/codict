@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /**@jsxRuntime classic */
 /**@jsx jsx */
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

@@ -1,10 +1,11 @@
+/* eslint-disable react/prop-types */
 /**@jsxRuntime classic */
 /**@jsx jsx */
 
 import { jsx, Box, Input, Alert, Label } from "theme-ui";
 import { useContext, useEffect, useState } from "react";
 import { newFormCTX } from "../../ctx/forms/newFormCTX";
-import { nameSchema } from "../newForm/schema/schema";
+import { nameSchema } from "./schema/schema";
 import { useRouter } from "next/router";
 
 const _SX = {

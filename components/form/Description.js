@@ -4,7 +4,7 @@
 import { jsx, Box, Label, Textarea, Alert } from "theme-ui";
 import { useContext, useEffect, useState } from "react";
 import { newFormCTX } from "../../ctx/forms/newFormCTX";
-import { descriptionSchema } from "../newForm/schema/schema";
+import { descriptionSchema } from "./schema/schema";
 
 const _SX = {
   alert: {
@@ -14,7 +14,7 @@ const _SX = {
   },
 };
 
-export default function Description({}) {
+export default function Description() {
   const [newFormCtxState, setNewFormCtxState] = useContext(newFormCTX);
   const [desc, setDesc] = useState("");
   const [descAlert, setDescAlert] = useState("");

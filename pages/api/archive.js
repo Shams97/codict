@@ -69,7 +69,6 @@ export default async function archive(req, res) {
        ********************************
        ********************************
        */
-      await mongoose.connection.close();
       res.statusCode = 200;
       res.json({ groupedOptions });
     } catch (e) {

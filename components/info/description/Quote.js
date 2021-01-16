@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /**@jsxRuntime classic */
 /**@jsx jsx */
 import { jsx } from "theme-ui";
@@ -16,10 +17,10 @@ const Quote = ({ children, ...props }) => {
   const { words, counter } = props;
   return (
     <CardText>
-      <span sx={_SX.start}>"</span>
+      <span sx={_SX.start}>&ldquo;</span>
       {children}
       <span className="mx-2" sx={_SX.end}>
-        ..." <i sx={_SX.usernameItalic}>by</i>
+        ...&rdquo;<i sx={_SX.usernameItalic}>by</i>
       </span>
       <cite>
         <i>

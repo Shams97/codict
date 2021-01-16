@@ -15,7 +15,7 @@ export default function Search() {
   const router = useRouter();
   const { data, error } = useLabels();
 
-  const handleChange = (inputValue, { action }) => {
+  const handleChange = (inputValue) => {
     // on user selection
     // use next router here to navigate to selected word page
     inputValue !== null && router.push(`/${inputValue.value}`);

@@ -47,7 +47,7 @@ export default async function (req, res) {
       if (e.name === "NotOneIntiger") {
         // HANDLE CUSTOM ERRROR
         res.status(400);
-        res.end();
+        res.end({ ok: true });
       } else {
         res.status(400);
         // rest of errors

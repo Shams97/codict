@@ -37,7 +37,7 @@ export default async function (req, res) {
         doc.list[req.body.data.word.order].social[1].count += 1;
         await doc.save();
         res.status(200);
-        res.end();
+        res.end({ ok: true });
       } else {
         not_integer.message =
           "user provided a non intiger value. something is malicous here";

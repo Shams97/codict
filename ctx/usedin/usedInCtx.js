@@ -1,4 +1,5 @@
-import { createContext, useState } from "react";
+/* eslint-disable react/prop-types */
+import React, { createContext, useState } from "react";
 const defaultValue = {
   languages: { all: false, none: false, isNoneOption: false },
   os: { all: false, none: false, isNoneOption: false },

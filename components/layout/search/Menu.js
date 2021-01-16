@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /**@jsxRuntime classic */
 /**@jsx jsx */
 import { jsx } from "theme-ui";
@@ -12,7 +13,8 @@ const Menu = ({ children, ...props }) => {
         border: "1px solid",
         borderRadius: "5px",
         padding: "0 5px",
-      }}>
+      }}
+    >
       {children}
     </components.Menu>
   );

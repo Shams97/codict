@@ -24,6 +24,7 @@ export default async function (req, res) {
         .status(200)
         .send({ words: count_words, contributions: count_contributions });
     } catch (e) {
+      console.log(e);
       res.status(400).end();
     }
   }

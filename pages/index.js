@@ -32,7 +32,6 @@ export default function Home() {
         <Row className="text-center" sx={_SX.row}>
           <NumbersCard />
           <WhyCard />
-          <SuppotrCard />
         </Row>
       </Container>
       {/* children of layout */}

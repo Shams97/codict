@@ -1,10 +1,11 @@
+/* eslint-disable react/prop-types */
 /**@jsxRuntime classic */
 /**@jsx jsx */
 import { jsx } from "theme-ui";
 import { Card, CardBody, CardFooter, Col, Row } from "reactstrap";
-import NextDef from "../info/NextDef";
-import DescNavItem from "../info/DescNavItem";
-import Quote from "../info/Quote";
+import NextDef from "./NextDef";
+import DescNavItem from "./DescNavItem";
+import Quote from "./Quote";
 
 const _SX = {
   card: {

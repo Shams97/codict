@@ -12,7 +12,7 @@ const formatDataForUI = (obj) => {
         user: entry.user,
         name: entry.name,
         description: entry.description,
-        social: entry.social.map((s, i) => {
+        social: entry.social.map((s) => {
           return {
             name: s.name,
             count: s.count,

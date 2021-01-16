@@ -37,21 +37,7 @@ const options = [
   },
 ];
 
-const _SX = {
-  alert: {
-    color: "red",
-    backgroundColor: "background",
-    fontSize: "12px",
-  },
-  prompt: { fontSize: "10px", color: "primary" },
-  set: {
-    display: "flex",
-    justifyContent: "center",
-    flexWrap: "wrap",
-  },
-};
-
-export default function UsedIn({}) {
+export default function UsedIn() {
   const [newFormCtxState, setNewFormCtxState] = useContext(newFormCTX);
 
   //every new render/rerender(when click 'back') reset data input and enable next button

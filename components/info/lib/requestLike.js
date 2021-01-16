@@ -10,9 +10,9 @@ const requestLike = (word, order, fetchErrCtxState, setFetchErrCtxState) => {
     .put("/api/like", {
       data: { like: 1, word: { name: word, order } },
     })
-    .then(() => {
+    .then((res) => {
       useNotifications("like", {
-        data,
+        data: res.data.ok,
         error: undefined,
         fetchErrCtxState,
         setFetchErrCtxState,
@@ -20,7 +20,7 @@ const requestLike = (word, order, fetchErrCtxState, setFetchErrCtxState) => {
       });
     })
     .catch((error) => {
-      if (error.hasOwnProperty("isAxiosError")) {
+      if (error.isAxiosError) {
         useNotifications("like", {
           data: undefined,
           error,

@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /**@jsxRuntime classic */
 /**@jsx jsx */
 import { jsx } from "theme-ui";
@@ -5,11 +6,11 @@ import { createRef, useEffect } from "react";
 import { Table, Col, Row } from "reactstrap";
 import { useColorMode } from "theme-ui";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import tableStyles from "../../styles/table.module.scss";
+import tableStyles from "../../../styles/table.module.scss";
 
 export default function InfoTable({ words, counter }) {
   const ref = createRef();
-  const [colorMode, setColor] = useColorMode();
+  const [colorMode] = useColorMode();
   const _Sx = {
     th: {
       position: "sticky",

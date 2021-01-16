@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /**@jsxRuntime classic */
 /**@jsx jsx */
 import { jsx } from "theme-ui";
@@ -6,9 +7,9 @@ import { useState, useEffect, useContext } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import IconButton from "@material-ui/core/IconButton";
 import Badge from "@material-ui/core/Badge";
-import { fetchErr } from "../../ctx/notification/FetchErrCtx";
-import requestLike from "./lib/requestLike";
-import requestDislike from "./lib/requestDislike";
+import { fetchErr } from "../../../ctx/notification/FetchErrCtx";
+import requestLike from "../lib/requestLike";
+import requestDislike from "../lib/requestDislike";
 
 /**
  *

@@ -1,3 +1,7 @@
+/* eslint-disable react/prop-types */
+import "../styles/globals.css";
+
+import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import {
   faMicrophoneAlt,
@@ -46,6 +50,7 @@ import {
   faCentos,
   faWindows,
   faGithub,
+  faTwitter,
 } from "@fortawesome/free-brands-svg-icons";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import ThemeUICTX from "../ctx/themes/ThemeUI-Ctx";
@@ -98,7 +103,8 @@ library.add(
   faFedora,
   faCentos,
   faWindows,
-  faGithub
+  faGithub,
+  faTwitter
 );
 
 export default function MyApp({ Component, pageProps }) {

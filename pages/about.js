@@ -1,3 +1,4 @@
+import React from "react";
 import { Row } from "reactstrap";
 import { Text } from "theme-ui";
 import SuppotrCard from "../components/landing/SupportCard";
@@ -18,11 +19,11 @@ export default function About() {
         annoying to me, as i was learning is, an article author for example,
         mentions something that looks compeletly new to me. Something that makes
         me feel i know nothing!!. Reality is, as you are learning and come
-        across such things, you don't need to pause the entire universe and go
-        learn that little annoying thing, as this could be recursively infinite
-        and when you may face another unknown term as you go. Hence, from my
-        experience, all you rally need to do, is to get a rough idea about that
-        myestirous thing and continue your learning journey. Codict{" "}
+        across such things, you don`&apos`t need to pause the entire universe
+        and go learn that little annoying thing, as this could be recursively
+        infinite and when you may face another unknown term as you go. Hence,
+        from my experience, all you rally need to do, is to get a rough idea
+        about that myestirous thing and continue your learning journey. Codict{" "}
         <sup>&reg;</sup> comes to rescue. With the help of the community, you
         will find curated definitions and brief introductions to to whatever
         term you might face as you learn.

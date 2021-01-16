@@ -4,8 +4,8 @@ import { jsx } from "theme-ui";
 import { Fragment, useState } from "react";
 import Layout from "../components/layout/Layout";
 import { Container } from "reactstrap";
-import Description from "../components/info/Description";
-import InfoTable from "../components/info/Table";
+import Description from "../components/info/description/Description";
+import InfoTable from "../components/info/description/Table";
 import Synonyms from "../components/info/Synonyms";
 import LinksGroup from "../components/info/links/LinksGroup";
 import { useRouter } from "next/router";
@@ -13,15 +13,6 @@ import useSWR from "swr";
 import OptimisticDescription from "../components/optimistic/Description";
 import OptimisticTable from "../components/optimistic/Table";
 import WordFetchError from "../components/layout/errors/WordFetchError";
-
-const _SX = {
-  header: {
-    display: "flex",
-    alignItems: "center",
-    margin: "5rem 0 1rem 0",
-    justifyContent: "center",
-  },
-};
 
 export default function WordPage() {
   const [counter, setCounter] = useState(0);

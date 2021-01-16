@@ -58,7 +58,7 @@ const AppNav = () => {
   const toggle = () => {
     setIsOpen(!isOpen);
   };
-  const [session, loading] = useSession();
+  const [session] = useSession();
   return (
     <div>
       <Navbar fixed="top" expand="md" sx={_SX.navbar}>

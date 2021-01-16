@@ -11,9 +11,9 @@ const requestDislike = (word, order, fetchErrCtxState, setFetchErrCtxState) => {
     .put("/api/dislike", {
       data: { dislike: 1, word: { name: word, order } },
     })
-    .then(() => {
+    .then((res) => {
       useNotifications("like", {
-        data,
+        data: res.data.ok,
         error: undefined,
         fetchErrCtxState,
         setFetchErrCtxState,
@@ -21,7 +21,7 @@ const requestDislike = (word, order, fetchErrCtxState, setFetchErrCtxState) => {
       });
     })
     .catch((error) => {
-      if (error.hasOwnProperty("isAxiosError")) {
+      if (error.isAxiosError) {
         useNotifications("like", {
           data: undefined,
           error,

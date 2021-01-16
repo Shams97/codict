@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /**@jsxRuntime classic */
 /**@jsx jsx */
 
@@ -37,7 +38,7 @@ const Title = ({ name }) => <h5 className="mt-4 mb-4 text-center">{name}</h5>;
 
 const Icons = ({ iconList, label }) => {
   const [formCtxState, setFormCtxState] = useContext(newFormCTX);
-  const [noneAll, setNoneAll] = useContext(allNoneCtx);
+  const [, setNoneAll] = useContext(allNoneCtx);
   const [select, setSelect] = useState({});
   const handleSelect = (e, i) => {
     e.preventDefault();

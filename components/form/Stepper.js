@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /**@jsxRuntime classic */
 /**@jsx jsx */
 import { jsx, useThemeUI, Spinner, Alert } from "theme-ui";
@@ -10,12 +11,12 @@ import StepContent from "@material-ui/core/StepContent";
 import Button from "@material-ui/core/Button";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
-import Name from "../../components/newForm/Name";
+import Name from "../../components/form/Name";
 import { newFormCTX } from "../../ctx/forms/newFormCTX";
 import Description from "./Description";
 import UsedIn from "./used-in/UsedIn";
 import UsefullTemplate from "./usefull/UsefullTemplate";
-import Synonyms from "../newForm/Synonyms";
+import Synonyms from "../form/Synonyms";
 import { useRouter } from "next/router";
 import organizeFormData from "../../lib/pages/organizedFormData";
 import { useSession } from "next-auth/client";
@@ -65,7 +66,7 @@ export default function CustomStepper({ newWord, edit, word }) {
   const steps = getSteps();
   const context = useThemeUI();
   const { theme } = context;
-  const [newFormState, _] = useContext(newFormCTX);
+  const [newFormState] = useContext(newFormCTX);
   const [reqSpinner, setReqSpinner] = useState(false);
   // control final step buttons (buttons are disabled when requesting)
   const [requesting, setRequesting] = useState(false);
@@ -74,7 +75,7 @@ export default function CustomStepper({ newWord, edit, word }) {
     isOk: false,
   });
   const router = useRouter();
-  const [session, __] = useSession();
+  const [session] = useSession();
 
   const _SX = {
     back: {

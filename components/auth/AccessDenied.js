@@ -1,8 +1,7 @@
 /**@jsxRuntime classic */
 /**@jsx jsx */
 
-import { Button, Container, jsx } from "theme-ui";
-import { signIn } from "next-auth/client";
+import { Container, jsx } from "theme-ui";
 import styles from "../../styles/403.module.scss";
 
 export default function AccessDenied() {

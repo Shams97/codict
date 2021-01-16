@@ -30,8 +30,8 @@ const _SX = {
 };
 
 export default function FetchErrorNotification() {
-  const [fetchErrCtxState, _] = useContext(fetchErr);
-  const [render, setRender] = useState(false);
+  const [fetchErrCtxState] = useContext(fetchErr);
+  const [render, setRender] = useState(true);
 
   useEffect(() => {
     if (fetchErrCtxState.size > 0) {
@@ -44,7 +44,6 @@ export default function FetchErrorNotification() {
   if (render) {
     return (
       <div className="m-4" sx={_SX.root}>
-        <div sx={_SX.message}>Something is wrong</div>
         <Spinner className="mx-2" size="sm" />
       </div>
     );
