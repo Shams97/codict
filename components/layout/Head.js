@@ -23,7 +23,7 @@ export default function CustomHead({ title, description, keywords }) {
         <link rel="me" href="mailto:gistcodee@gmail.com" />
         <link rel="me" href="sms:+9647826623170"></link>
         {/* Twitter */}
-        <meta name="twitter:card" content={description} key="twcard" />
+        <meta name="twitter:card" content="summary" key="twcard" />
         <meta
           name="twitter:creator"
           content="https://twitter.com/gist32091948"
