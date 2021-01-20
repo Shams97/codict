@@ -6,13 +6,12 @@ export default function CustomHead({ title, description, keywords }) {
   return (
     <>
       <Head>
-        <meta charset="utf-8" key="charset"></meta>
+        <meta charSet="utf-8" key="charset"></meta>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <title>{title}</title>
         <meta name="theme-color" content="#F6F7FF" key="5" />
         <meta name="description" content={description} key="description" />
         <meta name="keywords" content={keywords} key="keywords" />
-        <meta charSet="utf-8" />
         <meta name="google" content="nositelinkssearchbox"></meta>
         <meta name="robots" content="index,follow"></meta>
         <meta name="google" content="notranslate"></meta>

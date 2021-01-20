@@ -5,7 +5,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { providers, signIn } from "next-auth/client";
 import { useRouter } from "next/router";
-import { Fragment, useEffect } from "react";
+import { Fragment } from "react";
 import { Button, jsx, Text, Card } from "theme-ui";
 import Layout from "../../components/layout/Layout";
 
@@ -43,9 +43,7 @@ const _sx = {
 
 export default function SignIn({ providers }) {
   const router = useRouter();
-  useEffect(() => {
-    console.log("query", router);
-  }, []);
+
   return (
     <Fragment>
       <Layout includeSearchInput={false} bluredBg></Layout>
