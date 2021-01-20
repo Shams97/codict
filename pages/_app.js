@@ -1,6 +1,4 @@
 /* eslint-disable react/prop-types */
-import "../styles/globals.css";
-
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import {
@@ -57,6 +55,8 @@ import ThemeUICTX from "../ctx/themes/ThemeUI-Ctx";
 import MaterialUICTX from "../ctx/themes/MateriaUI-Ctx";
 import FetchErrCtx from "../ctx/notification/FetchErrCtx";
 import { Provider } from "next-auth/client";
+
+import "../styles/globals.css";
 
 library.add(
   faCheck,
