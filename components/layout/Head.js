@@ -22,7 +22,16 @@ export default function CustomHead({ title, description, keywords }) {
         <link rel="me" href="sms:+9647826623170"></link>
         {/* Twitter */}
         <meta name="twitter:card" content={description} key="twcard" />
-        <meta name="twitter:creator" content="codict" key="twhandle" />
+        <meta
+          name="twitter:creator"
+          content="https://twitter.com/gist32091948"
+          key="twcreator"
+        />
+        <meta
+          name="twitter:site"
+          content="https://twitter.com/gist32091948"
+          key="twsite"
+        />
 
         {/* Open Graph */}
         <meta property="og:url" content={"https://www.codict.io"} key="ogurl" />
